@@ -1,12 +1,17 @@
 #include <vector>
 #include <istream>
+#include <algorithm>
+#include <random>
+
 #include "Card.h"
 #include "CardFactory.h"
 
-class Deck : std::vector<Card> {
+using namespace std;
+class Deck : public vector<Card*> {
+    void shuffle_cards();
     public:
-        Deck(std::istream&, CardFactory*);
+        Deck(istream&, const CardFactory*);
         ~Deck();
         Card* draw();
-        friend std:ostream& operator<<(std::ostream&, const Deck&);
+        friend ostream& operator<<(ostream&, const Deck&);
 };
