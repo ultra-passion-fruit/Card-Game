@@ -3,14 +3,14 @@
 #include <ostream>
 #include "Card.h"
 #include "CardFactory.h"
-
-class DiscarPile : std::vector<Card*> {
+using namespace std;
+class DiscardPile : vector<Card*> {
     public:
-        DiscarPile(std::istream&, const CardFactory*);
+        DiscardPile(std::istream&, const CardFactory*);
         ~DiscardPile();
-        DicardPile& operator+=(Card*);
+        DiscardPile& operator+=(Card*);
         Card* pickUp();
-        Card* top();
-        void print(std::ostream&);
+        Card* top() const;
+        void print(std::ostream&) const;
         friend std::ostream& operator<<(std::ostream&, const Card&);
 };
