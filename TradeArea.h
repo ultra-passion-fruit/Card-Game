@@ -4,6 +4,9 @@
 #include "Card.h"
 #include "CardFactory.h"
 
+// TradeArea class will have to hold cards openly and support random access insertion and
+// removal.
+
 class TradeArea : std::list<Card*> {
     public:
         TradeArea(std::istream&, const CardFactory*);

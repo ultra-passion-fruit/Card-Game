@@ -5,7 +5,8 @@
 
 class Table {
     private:
-        Player;
+        Player1;
+        Player2;
         Deck;
         DiscardPile;
         TradeArea;
