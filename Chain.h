@@ -1,4 +1,5 @@
 #include <istream>
+#include "CardFactory.h"
 
 template <class T> class Chain : Chain_Base {
     private:

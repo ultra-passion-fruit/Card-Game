@@ -3,8 +3,9 @@
 #include <ostream>
 #include "Card.h"
 #include "CardFactory.h"
-using namespace std;
-class DiscardPile : vector<Card*> {
+
+class DiscardPile{
+    std::vector<Card*> discardPile;
     public:
         DiscardPile(std::istream&, const CardFactory*);
         ~DiscardPile();
