@@ -5,15 +5,15 @@
 
 class Table {
     private:
-        Player1;
-        Player2;
-        Deck;
-        DiscardPile;
-        TradeArea;
+        Player Player1;
+        Player Player2;
+        Deck deck;
+        DiscardPile discardPile;
+        TradeArea tradeArea;
     public:
         Table(std::istream&, const CardFactory*);
         ~Table();
         bool win(std::string&);
         void printHand(bool);
-        friend std:ostream& operator<<(std::ostream&, const Table&);
+        friend std::ostream& operator<<(std::ostream&, const Table&);
 };
