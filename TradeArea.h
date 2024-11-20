@@ -10,6 +10,7 @@
 class TradeArea : std::list<Card*> {
     public:
         TradeArea(std::istream&, const CardFactory*);
+        TradeArea();
         ~TradeArea();
         TradeArea& operator+=(Card*);
         bool legal(Card*);
