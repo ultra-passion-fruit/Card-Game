@@ -2,11 +2,14 @@
 #include <ostream>
 #include "Card.h"
 #include "CardFactory.h"
+#include "Chain_Base.h"
+#include "Hand.h"
 
 class Player {
     private:
-        Hand;
+        Hand hand;
     public:
+        Player();
         Player(std::string&);
         Player(std::istream&, const CardFactory*);
         ~Player();
@@ -15,7 +18,7 @@ class Player {
         Player& operator+=(int);
         int getMaxNumChains();
         int getNumChains();
-        Chain& operator[](int);
+        Chain_Base& operator[](int);
         void buyThirdChain();
         std::ostream& printHand(std::ostream&, bool);
         friend std::ostream& operator<<(std::ostream&, const Player&);
