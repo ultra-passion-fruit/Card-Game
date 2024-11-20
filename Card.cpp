@@ -1,5 +1,10 @@
 #include "Card.h"
 
+std::ostream& operator<<(std::ostream& os, Card& c){
+    c.print(os);
+    return os;
+}
+
 int Blue::getCardsPerCoin(int coins) {
     if(coins >= 1 && coins <= 4){
         return valTable[coins - 1];
