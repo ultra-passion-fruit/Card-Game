@@ -5,13 +5,14 @@
 
 class Table {
     private:
-        Player Player1;
-        Player Player2;
+        Player player1;
+        Player player2;
         Deck deck;
         DiscardPile discardPile;
         TradeArea tradeArea;
     public:
         Table(std::istream&, const CardFactory*);
+        Table(const Player, const Player, CardFactory*);
         ~Table();
         bool win(std::string&);
         void printHand(bool);
