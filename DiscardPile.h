@@ -14,6 +14,7 @@ class DiscardPile{
     std::vector<Card*> discardPile;
     public:
         DiscardPile(std::istream&, const CardFactory*);
+        DiscardPile();
         ~DiscardPile();
         DiscardPile& operator+=(Card*);
         Card* pickUp();
