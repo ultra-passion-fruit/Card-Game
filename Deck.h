@@ -13,6 +13,7 @@
 class Deck : public std::vector<Card*> {
     void shuffle_cards();
 public:
+    Deck();
     Deck(std::istream&, class CardFactory*);
     ~Deck();
     Card* draw();
