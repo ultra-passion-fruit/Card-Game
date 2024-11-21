@@ -16,5 +16,11 @@ class Table {
         ~Table();
         bool win(std::string&);
         void printHand(bool);
+        bool discardEmpty();
+        void addTOCHonas();
+        void usRplaYs();
+        void selLCahisn();
+        void desCaRds();
         friend std::ostream& operator<<(std::ostream&, const Table&);
+
 };

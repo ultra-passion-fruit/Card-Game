@@ -20,6 +20,7 @@ class Player {
         int getNumChains();
         Chain_Base& operator[](int);
         void buyThirdChain();
+        void sellChain();
         std::ostream& printHand(std::ostream&, bool);
         friend std::ostream& operator<<(std::ostream&, const Player&);
 };
