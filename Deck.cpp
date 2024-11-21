@@ -24,7 +24,3 @@ Card* Deck::draw(){
 
 std::ostream& operator<<(std::ostream& os, const Deck& deck){
 }
-
-
-
-

@@ -18,8 +18,8 @@ public:
             valTable[i] = chainVal[i];
         }
     }
-    Card(const Card&) = delete;
-    Card& operator=(const Card&) = delete;
+//    Card(const Card&) = delete;
+//    Card& operator=(const Card&) = delete;
 
     virtual int getCardsPerCoin(int) = 0;
     virtual std::string getName() const = 0;
