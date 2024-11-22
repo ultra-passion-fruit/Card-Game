@@ -16,11 +16,13 @@ class Table {
         ~Table();
         bool win(std::string&);
         void printHand(bool);
-        bool discardEmpty();
-        void addTOCHonas();
-        void usRplaYs();
-        void selLCahisn();
-        void desCaRds();
+        bool discardIsEmpty();
+        void addToChains(bool, bool);
+        void playerPlay();
+        void playerSellChain(const Player*);
+        void playerDiscards();
+        void lastDraw();
+        void finishTurn();
         friend std::ostream& operator<<(std::ostream&, const Table&);
 
 };
