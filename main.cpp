@@ -20,7 +20,9 @@ void main() {
     
     std::cout << "Great! Let's begin." << std::endl;
 
-    // making table (deals cards in ctor)
+    // Making Table Object
+        // (deals cards in ctor)
+        // (defines p1 as starting player)
     Table table(p1, p2, factory);
     
     // winner variable for later
@@ -30,36 +32,31 @@ void main() {
 
     // Load game from file
 
-    // sets starting player as p1
-    Player* current = &p1;
-
     // REPEAT as long as deck is not empty
     while (!table.win(winner))
     {
         // if PAUSE then save game (to file) and exit
         // else
         
-        // starts off with p1
-        // changes to p2 at the end
-        
+        // P1 starting player
+        std::cout << p1.getName() << ", it is your turn." << std::endl;
+
         // display table
         std:: cout << table << std::endl;
         
         // if trade area not empty
         if(!table.discardIsEmpty())
         {
-            // OPTION:
-                // 1. to add to chain
-                // 2. or discard cards (all of them ig?)
-            // will show Trade Area and allow player to choose card
-                // to add to chain
+            // OPTION: Add cards to chain
+            // will show Trade Area
+            // allow player to choose card to add to chain
             // can choose to discard all cards too
             table.addToChains(true, false);
         }
         
         char repeat = 'n';
         std::cout << "Choose a chain to place your topmost card." << std::endl;
-        // REPEAT as long as USER wants
+        // REPEAT as long as player wants
         do
         {
             // PLAYER play topmost card from hand
@@ -73,7 +70,7 @@ void main() {
                 // absolutely must sell chains, not sure how to do yet.
             // receive coins (if any)
             // will list to player the chain options to sell
-            table.playerSellChain(current);
+            table.playerSellChain();
             
             std::cout << "Would you like to play another card? (y/n) ";
             std::cin >> repeat;
@@ -83,21 +80,16 @@ void main() {
         char discard = 'n';        
         std::cout << "Would you like to discard a card from your hand? (y/n) ";
         std::cin >> discard;
-        // OPTION:
-            // 1. want to discard
-                // SHOW full player hand
-                // SELECT card to discard
-            // 2. not want discard
+        // OPTION: Discard a card
         if (discard == 'y')
         {
-            // shows player cards to discard and chooses
+            // shows cards to discard and player chooses
             table.playerDiscards();
         }
             
         // DRAW 3 cards from deck and place in trade area
         // DRAW from discard pile as long as same bean trade area
         std::cout << "Drawing 3 cards from deck..." << std::endl;
-        // will draw 3 cards and keep drawing from discard pile till no good
         table.lastDraw();
 
         // ADD from trade area to chain (OPT)
@@ -113,12 +105,7 @@ void main() {
         table.finishTurn();
 
         // CHANGE player
-        if (current == &p1)
-        {
-            current = &p2;
-        } else {
-            current = &p1;
-        }
+        table.changeCurrent();
     }
 
         

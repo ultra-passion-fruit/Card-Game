@@ -13,9 +13,10 @@
 * @param Player p2
 * @param CardFactory* factory
 */
-Table::Table(const Player p1, const Player p2, CardFactory* fact) {
+Table::Table(Player p1, Player p2, CardFactory* fact) {
     player1 = p1;
     player2 = p2;
+    current = &p1;
     deck = fact->getDeck();
     discardPile = DiscardPile();
     tradeArea = TradeArea();
@@ -32,6 +33,22 @@ void Table::printHand(bool all=false) {
     // printing p2 hand
     std::cout << "Player 2:" << std::endl;
     player2.printHand(std::cout, all) << std::endl;
+}
+
+/*
+* Changes the player for the next turn.
+* @return True if successful, false otherwise.
+*/
+bool Table::changeCurrent() {
+    if (current == &player1)
+    {
+        current = &player2;
+        return true;
+    } else if (current == &player2) {
+        current = &player1;
+        return true;
+    }
+    return false;
 }
 
 /*

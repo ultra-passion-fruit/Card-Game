@@ -7,19 +7,21 @@ class Table {
     private:
         Player player1;
         Player player2;
+        Player* current;
         Deck deck;
         DiscardPile discardPile;
         TradeArea tradeArea;
     public:
         Table(std::istream&, const CardFactory*);
-        Table(const Player, const Player, CardFactory*);
+        Table(Player, Player, CardFactory*);
         ~Table();
         bool win(std::string&);
         void printHand(bool);
+        bool changeCurrent();
         bool discardIsEmpty();
         void addToChains(bool, bool);
         void playerPlay();
-        void playerSellChain(const Player*);
+        void playerSellChain();
         void playerDiscards();
         void lastDraw();
         void finishTurn();
