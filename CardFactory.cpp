@@ -37,8 +37,8 @@ CardFactory::CardFactory() {
 }
 
 CardFactory::~CardFactory() {
-    for(Card &c: d){
-        delete c;
+    for(int i = 0; i < 104; i++) {
+        delete d[i];
     }
 }
 
