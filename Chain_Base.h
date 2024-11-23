@@ -6,6 +6,9 @@
 */
 class Chain_Base {
     public:
-        Chain_Base(std::istream&, const CardFactory*);
-        ~Chain_Base();
+        // Chain_Base(std::istream&, const CardFactory*);
+        Chain_Base() = default;
+        ~Chain_Base() = default;
+
+        virtual int sell() = 0;
 };
