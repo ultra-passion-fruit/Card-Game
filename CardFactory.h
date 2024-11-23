@@ -11,13 +11,11 @@ class CardFactory {
 private:
     static const int blueSz = 20, chiliSz = 18, stinkSz = 16, greenSz = 14, soySz = 12, blackSz = 10, redSz = 8, gardenSz = 6;
     CardFactory();
+    CardFactory(const CardFactory&);
+    ~CardFactory();
     Deck d;
 public:
-    CardFactory(const CardFactory&) = delete;
-    CardFactory& operator=(const CardFactory&) = delete;
-
-
-    ~CardFactory();
+    // CardFactory& operator=(const CardFactory&) = delete;
     static CardFactory* getFactory();
     Deck getDeck();
 };
