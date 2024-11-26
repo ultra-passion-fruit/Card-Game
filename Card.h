@@ -21,11 +21,22 @@ public:
     Card(const Card&) = delete;
     Card& operator=(const Card&) = delete;
 
+    // Takes an amount of coins as integer input and return a chain number with
+    // the corresponding value.
     virtual int getCardsPerCoin(int) = 0;
+
+    // Returns a string to represent the full name of the card.
     virtual std::string getName() const = 0;
+
+    // Inserts the first character of the card in the provided output stream.
     virtual void print(std::ostream&) = 0;
+
+    // Global output stream for printing any card types derived from Card.
     friend std::ostream& operator <<(std::ostream& os, Card& c);
 };
+
+// Below are the different card types which will provide unique implementations for the
+// abstract functions inherited from the Card class.
 
 class Blue: public Card {
     friend class CardFactory;

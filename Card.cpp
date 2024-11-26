@@ -5,6 +5,7 @@ std::ostream& operator<<(std::ostream& os, Card& c){
     return os;
 }
 
+// Card type Blue *************************************************************
 int Blue::getCardsPerCoin(int coins) {
     if(coins >= 1 && coins <= 4){
         return valTable[coins - 1];
@@ -19,6 +20,7 @@ void Blue::print(std::ostream &os) {
     os << "B ";
 }
 
+// Card type Chili *************************************************************
 int Chili::getCardsPerCoin(int coins) {
     if(coins >= 1 && coins <= 4){
         return valTable[coins - 1];
@@ -33,6 +35,7 @@ void Chili::print(std::ostream &os) {
     os << "C ";
 }
 
+// Card type Stink *************************************************************
 int Stink::getCardsPerCoin(int coins) {
     if(coins >= 1 && coins <= 4){
         return valTable[coins - 1];
@@ -47,6 +50,7 @@ void Stink::print(std::ostream &os) {
     os << "S ";
 }
 
+// Card type Green *************************************************************
 int Green::getCardsPerCoin(int coins) {
     if(coins >= 1 && coins <= 4){
         return valTable[coins - 1];
@@ -61,6 +65,7 @@ void Green::print(std::ostream &os) {
     os << "G ";
 }
 
+// Card type Soy *************************************************************
 int Soy::getCardsPerCoin(int coins) {
     if(coins >= 1 && coins <= 4){
         return valTable[coins - 1];
@@ -75,6 +80,7 @@ void Soy::print(std::ostream &os) {
     os << "s ";
 }
 
+// Card type Black *************************************************************
 int Black::getCardsPerCoin(int coins) {
     if(coins >= 1 && coins <= 4){
         return valTable[coins - 1];
@@ -89,6 +95,7 @@ void Black::print(std::ostream &os) {
     os << "b ";
 }
 
+// Card type Red *************************************************************
 int Red::getCardsPerCoin(int coins) {
     if(coins >= 1 && coins <= 4){
         return valTable[coins - 1];
@@ -103,6 +110,7 @@ void Red::print(std::ostream &os) {
     os << "R ";
 }
 
+// Card type Garden *************************************************************
 int Garden::getCardsPerCoin(int coins) {
     if(coins >= 2 && coins <= 3){
         return valTable[coins - 1];

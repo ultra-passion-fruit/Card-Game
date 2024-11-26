@@ -9,13 +9,32 @@
 
 class CardFactory {
 private:
-    static const int blueSz = 20, chiliSz = 18, stinkSz = 16, greenSz = 14, soySz = 12, blackSz = 10, redSz = 8, gardenSz = 6;
+
+    // Total amount of each card type in deck
+    static const int
+    blueSz = 20,
+    chiliSz = 18,
+    stinkSz = 16,
+    greenSz = 14,
+    soySz = 12,
+    blackSz = 10,
+    redSz = 8,
+    gardenSz = 6;
+
+    Deck d; // A deck of 104 cards
+
+    // The constructor, copy constructor, and destructor are declared private to ensure
+    // that once created, no other classes can temper with the CardFactory instance and
+    // that there is at most on CardFactory object in the program.
     CardFactory();
     CardFactory(const CardFactory&);
     ~CardFactory();
-    Deck d;
+
 public:
-    // CardFactory& operator=(const CardFactory&) = delete;
+
+    // Returns a pointer to the only instance of the CardFactory.
     static CardFactory* getFactory();
+
+    // Returns a shuffled Deck of all 104 cards.
     Deck getDeck();
 };
