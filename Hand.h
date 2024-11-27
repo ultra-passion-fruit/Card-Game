@@ -1,4 +1,6 @@
 #include <istream>
+#include <list>
+#include <queue>
 #include <ostream>
 #include "Card.h"
 #include "CardFactory.h"
@@ -8,10 +10,12 @@
 // from the middle in Step 4 in the above description of a player's turn. Therefore, we can use a
 // std::list to remove at an arbitrary location efficiently with a std::queue adapter
 
-class Hand : std::list<Card*> {
+class Hand : public std::queue<Card*, std::list<Card*>> {
     public:
+        Hand();
         Hand(std::istream&, const CardFactory*);
         ~Hand();
+        std::list<Card*> getContainer();
         Hand& operator+=(Card*);
         Card* play();
         Card* top();
