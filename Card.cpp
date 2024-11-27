@@ -1,7 +1,9 @@
 #include "Card.h"
 
 std::ostream& operator<<(std::ostream& os, Card& c){
+    os << "| ";
     c.print(os);
+    os << "|";
     return os;
 }
 
