@@ -60,11 +60,12 @@ void main() {
         do
         {
             // PLAYER play topmost card from hand
-            try {
-                table.addToChains(false, true);
-            } catch (ChainInsertionException e) {
-                std::cout << e.out << std::endl;
-            }
+            table.addToChains(false, true);
+            // try {
+            //     table.addToChains(false, true);
+            // } catch (IllegalType e) {
+            //     std::cout << e.out << std::endl;
+            // }
 
             // TODO: Something that will check if the player 
                 // absolutely must sell chains, not sure how to do yet.
