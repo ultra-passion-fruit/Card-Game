@@ -51,7 +51,18 @@ void main() {
             // will show Trade Area
             // allow player to choose card to add to chain
             // can choose to discard all cards too
-            table.addToChains(true, false);
+            int pick = true;
+            std::cout << "OPTION:" << std::endl;
+            std::cout << "(1) Pick a card from trade area to add to chain." << std::endl;
+            std::cout << "(2) Discard all cards in the trade area." << std::endl;
+            do {
+                std::cout << "Choice: " << std::endl;
+                std::cin >> pick;
+            } while (pick > 2 || pick < 1);
+            pick--;
+            // if pick=true, don't discard, pick. Otherwise, discard
+            // 2nd arg = false, add from trade area, not hand
+            table.addToChains(pick, false);
         }
         
         char repeat = 'n';
