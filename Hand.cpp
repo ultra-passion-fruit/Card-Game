@@ -19,7 +19,8 @@ Hand& Hand::operator+=(Card* newCard) {
 
 /*
 * Removes top card from player's hand.
-@return Card pointer
+* @return Card pointer
+* @throws out_of_range
 */
 Card* Hand::play() {
     if (!this->empty())
@@ -34,7 +35,8 @@ Card* Hand::play() {
 
 /*
 * Shows top card from player's hand. (does not remove it)
-@return Card pointer
+* @return Card pointer
+* @throws out_of_range
 */
 Card* Hand::top() {
     if (!this->empty())
@@ -49,6 +51,7 @@ Card* Hand::top() {
 * Return the Card at the specified position.
 * Indexed from 0.
 * @return Card pointer
+* @throws out_of_range
 */
 Card* Hand::operator[](int i) {
     std::list<Card*>::iterator it = this->c.begin();
@@ -69,6 +72,13 @@ std::list<Card*> Hand::getContainer() {
     return this->c;
 }
 
+/*
+* Insertion operator for Hand class. Displays all cards in 
+* hand with card properly formatted.
+* @param os
+* @param hand
+* @return ostream reference
+*/
 std::ostream& operator<<(std::ostream& os, Hand& hand) {
     std::list<Card*> innerList = hand.getContainer();
     std::list<Card*>::iterator it = innerList.begin();
