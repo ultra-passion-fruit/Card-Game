@@ -25,6 +25,6 @@ class Table {
         void playerDiscards();
         void lastDraw();
         void finishTurn();
-        friend std::ostream& operator<<(std::ostream&, const Table&);
+        friend std::ostream& operator<<(std::ostream&, Table&);
 
 };

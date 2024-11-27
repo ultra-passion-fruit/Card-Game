@@ -22,6 +22,22 @@ Table::Table(Player p1, Player p2, CardFactory* fact) {
     tradeArea = TradeArea();
 }
 
+bool Table::win(std::string& winnerName) {
+    if (!empty(deck))
+    {
+        return false;
+    } else {
+        if (bool winning = player1.getNumCoins() > player2.getNumCoins())
+        {
+            winnerName = player1.getName();
+            return winning;
+        } else {
+            winnerName = player2.getName();
+            return !winning;
+        }
+    }
+}
+
 /*
 * Will only print top card when all=false (default).
 @param all
@@ -60,4 +76,13 @@ bool Table::changeCurrent() {
 */
 void Table::addToChains(bool allowDiscard, bool fromHand) {
 
+}
+
+std::ostream& operator<<(std::ostream& os, Table& table) {
+    // Display Trade Area
+
+    // On new line, display discard pile (first card)
+
+    // printing player hands
+    table.printHand();
 }
