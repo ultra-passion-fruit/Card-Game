@@ -64,6 +64,13 @@ Player& Player::operator+= (int newCoins) {
     return *this;
 }
 
+/*
+* Returns chain at specified index.
+* Indexed from 0.
+* @param i
+* @return Chain_Base reference
+* @throws out_of_range
+*/
 Chain_Base& Player::operator[](int i) {
     if (i < maxNumChains && i > -1)
     {
