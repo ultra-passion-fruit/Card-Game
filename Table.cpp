@@ -22,6 +22,13 @@ Table::Table(Player p1, Player p2, CardFactory* fact) {
     tradeArea = TradeArea();
 }
 
+/*
+* Returns true if a player has won.
+* Checks if the deck is empty. If so, checks which player
+* has more coins.
+*@param winnerName
+*@return bool
+*/
 bool Table::win(std::string& winnerName) {
     if (!empty(deck))
     {
@@ -72,7 +79,7 @@ bool Table::changeCurrent() {
 * When allowDiscard=true, player can choose to discard all cards in Trade Area.
 * When fromHand=true, card to add is topmost card from hand, otherwise is from Trade Area.
 * @param allowDiscard
-* @param tradeArea
+* @param fromHand
 */
 void Table::addToChains(bool allowDiscard, bool fromHand) {
 
