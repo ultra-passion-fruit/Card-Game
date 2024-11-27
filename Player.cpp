@@ -73,3 +73,15 @@ Chain_Base& Player::operator[](int i) {
     }
 }
 
+/*
+* Prints player's hand to console.
+* When all=true, prints all cards. Otherwise, only prints top card.
+*@param os
+*@param all
+*@return ostream reference
+*/
+std::ostream& Player::printHand(std::ostream& os, bool all) {
+    os << hand;
+    return os;
+}
+
