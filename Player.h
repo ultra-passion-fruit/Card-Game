@@ -13,6 +13,7 @@ class Player {
         int maxNumChains;
         std::vector<Chain_Base> chains;
     public:
+        Player();
         Player(std::string&);
         Player(std::istream&, const CardFactory*);
         ~Player();

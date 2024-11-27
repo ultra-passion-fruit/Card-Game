@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include <stdexcept>
+
 /*
 * Constructor with name.
 */
@@ -45,7 +47,12 @@ int Player::getMaxNumChains() {
 * Adds a new chain to the player.
 */
 void Player::buyThirdChain() {
-    
+    if (numOfCoins >= 3)
+    {
+        chains.resize(3);
+    } else {
+
+    }
 }
 
 /*
@@ -55,5 +62,14 @@ void Player::buyThirdChain() {
 Player& Player::operator+= (int newCoins) {
     numOfCoins += newCoins;
     return *this;
+}
+
+Chain_Base& Player::operator[](int i) {
+    if (i < maxNumChains && i > -1)
+    {
+        return chains[i];
+    } else {
+        throw std::out_of_range("Index out of range.");
+    }
 }
 
