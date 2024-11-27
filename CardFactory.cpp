@@ -52,6 +52,6 @@ Deck CardFactory::getDeck() {
 }
 
 CardFactory* CardFactory::getFactory() {
-    static CardFactory inst;
-    return &inst;
+    static CardFactory* inst = new CardFactory();
+    return inst;
 }
