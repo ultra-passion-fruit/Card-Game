@@ -3,12 +3,6 @@
 
 Deck::Deck(std::istream &, class CardFactory *) {}
 
-//Deck::~Deck(){
-//    for(Card* c: *this){
-//        delete c;
-//    }
-//}
-
 void Deck::shuffle_cards() {
     std::random_device rdm;
     std::mt19937 g(rdm());
@@ -17,10 +11,17 @@ void Deck::shuffle_cards() {
 }
 
 Card* Deck::draw(){
+    if(empty()) return nullptr;
+
     Card* card = back();
     pop_back();
     return card;
 }
 
 std::ostream& operator<<(std::ostream& os, const Deck& deck){
+    for(Card* c: deck){
+        os << *c;
+    }
+
+    return os;
 }

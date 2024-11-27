@@ -11,11 +11,20 @@
 // There is no insertion into the Deck. Deck can therefore usefully extend a std::vector.
 
 class Deck : public std::vector<Card*> {
+
+    // Shuffles the deck.
     void shuffle_cards();
 public:
-    Deck();
+
+    // Default constructor of the Deck.
+    Deck() = default;
+
+    // Reconstructs a deck from file using cards from the CardFactory
     Deck(std::istream&, class CardFactory*);
-    ~Deck();
+
+    // Returns and removes the card on top of the deck.
     Card* draw();
+
+    // Insert all cards in Deck on a provided ostream.
     friend std::ostream& operator<<(std::ostream&, Deck&);
 };

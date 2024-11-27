@@ -10,27 +10,23 @@
 
 template <class T> class Chain : public Chain_Base {
 private:
+
+    // The chain.
     std::vector<T*> chain;
 public:
     Chain(std::istream&, const CardFactory*);
-    // ~Chain();
-    virtual int sell() override;
+    int sell() override;
+    void print(std::ostream&) override;
+
+    // Adds a Card to the chain.
     Chain<T>& operator+=(Card*);
-    friend std::ostream& operator<<(std::ostream&, const Chain&);
-};
 
-
-template <class T>
-Chain<T> &Chain<T>::operator+=(Card * c) {
-    T* type = dynamic_cast<T*>(c);
-    if(!type){
-        throw IllegalType();
-    } else {
-        chain.push_back(type);
-        return *this;
+    // Insert the chain on a provided ostream.
+    friend std::ostream& operator<<(std::ostream& os, const Chain<T>& ch){
+        ch.print(os);
+        return os;
     }
-
-}
+};
 
 template <class T>
 int Chain<T>::sell() {
@@ -56,3 +52,25 @@ int Chain<T>::sell() {
     }
     return coins;
 }
+
+template <class T>
+void Chain<T>::print(std::ostream & os) {
+    os << chain.front()->getName() <<"\t";
+    for(const auto c: chain){
+        c->print(os);
+    }
+}
+
+
+template <class T>
+Chain<T> &Chain<T>::operator+=(Card * c) {
+    T* type = dynamic_cast<T*>(c);
+    if(!type){
+        throw IllegalType();
+    } else {
+        chain.push_back(type);
+        return *this;
+    }
+
+}
+
