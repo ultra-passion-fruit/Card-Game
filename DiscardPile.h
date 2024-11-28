@@ -21,18 +21,9 @@ public:
     // Reconstructs a DiscardPile from file based on cards on CardFactory.
     DiscardPile(std::istream&, const CardFactory*);
 
-    // Adds a provided card to the discard pile.
     DiscardPile& operator+=(Card*);
-
-    // Returns and removes a card from the top of the discard pile.
     Card* pickUp();
-
-    // Returns but does not remove a card from the top of the discard pile.
     Card* top() const;
-
-    // Insert all cards to a provided ostream.
     void print(std::ostream&) const;
-
-    // Insert only the top card to a provided ostream.
     friend std::ostream& operator<<(std::ostream&, const DiscardPile&);
 };

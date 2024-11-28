@@ -42,6 +42,10 @@ CardFactory::~CardFactory() {
     }
 }
 
+/**
+ * Returns a shuffled Deck of all 104 cards.
+ * @return A shuffled Deck.
+ */
 Deck CardFactory::getDeck() {
     std::random_device rdm;
     std::mt19937 g(rdm());
@@ -51,6 +55,10 @@ Deck CardFactory::getDeck() {
     return d;
 }
 
+/**
+ * Returns a pointer to the only instance of the CardFactory.
+ * @return The only instance of the CardFactory.
+ */
 CardFactory* CardFactory::getFactory() {
     static CardFactory* inst = new CardFactory();
     return inst;

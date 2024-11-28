@@ -31,10 +31,6 @@ private:
     ~CardFactory();
 
 public:
-
-    // Returns a pointer to the only instance of the CardFactory.
     static CardFactory* getFactory();
-
-    // Returns a shuffled Deck of all 104 cards.
     Deck getDeck();
 };

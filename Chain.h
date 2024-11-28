@@ -8,6 +8,12 @@
 // A template class will have to created for Chain being parametric in the type of card. In this
 // project, we will instantiate Chain for the corresponding bean card.
 
+class IllegalType: public _exception{
+public:
+    IllegalType() = default;
+    const char* what() const {return "IllegalType: Card type mismatch.";}
+};
+
 template <class T> class Chain : public Chain_Base {
 private:
 
@@ -18,16 +24,26 @@ public:
     int sell() override;
     void print(std::ostream&) override;
 
-    // Adds a Card to the chain.
     Chain<T>& operator+=(Card*);
 
-    // Insert the chain on a provided ostream.
+
+    /**
+     * Insert the chain on a provided ostream.
+     * @param os The ostream.
+     * @param ch A card chain.
+     * @return The ostream.
+     */
     friend std::ostream& operator<<(std::ostream& os, const Chain<T>& ch){
         ch.print(os);
         return os;
     }
 };
 
+/**
+ * Returns the coin value of chain based on length.
+ * @tparam T A card type.
+ * @return The value of the chain.
+ */
 template <class T>
 int Chain<T>::sell() {
     int coins = 0;
@@ -61,7 +77,12 @@ void Chain<T>::print(std::ostream & os) {
     }
 }
 
-
+/**
+ * Adds a Card to the chain.
+ * @tparam T A card type.
+ * @param c A card.
+ * @return The Chain object.
+ */
 template <class T>
 Chain<T> &Chain<T>::operator+=(Card * c) {
     T* type = dynamic_cast<T*>(c);
