@@ -1,3 +1,6 @@
+#pragma once
+#ifndef CARD_H
+#define CARD_H
 #include <string>
 #include <ostream>
 
@@ -109,3 +112,5 @@ public:
     std::string getName() const override;
     void print(std::ostream& os) override;
 };
+
+#endif

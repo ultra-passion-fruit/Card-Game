@@ -1,3 +1,6 @@
+#pragma once
+#ifndef DISCARDPILE_H
+#define DISCARDPILE_H
 #include <vector>
 #include <istream>
 #include <ostream>
@@ -27,3 +30,5 @@ public:
     void print(std::ostream&) const;
     friend std::ostream& operator<<(std::ostream&, const DiscardPile&);
 };
+
+#endif

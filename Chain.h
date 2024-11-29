@@ -1,3 +1,6 @@
+#pragma once
+#ifndef CHAIN_H
+#define CHAIN_H
 #include <istream>
 #include "Chain_Base.h"
 #include "CardFactory.h"
@@ -11,7 +14,7 @@
 class IllegalType: public _exception{
 public:
     IllegalType() = default;
-    const char* what() const {return "IllegalType: Card type mismatch.";}
+    const char* what() const {return "Card type mismatch.";}
 };
 
 template <class T> class Chain : public Chain_Base {
@@ -38,6 +41,23 @@ public:
         return os;
     }
 };
+
+template <class T>
+Chain<T>::Chain(std::istream & is, const CardFactory * cardFactory) {
+    std::string ln;
+    std::vector<bool> got(104, false);
+    std::getline(is, ln);
+    Deck fullDeck = cardFactory->getDeck();
+    for(char& c: ln){
+        if(c != ' '){
+            for(int i = 0; i < 104; i++){
+                if(!got[i] && fullDeck[i]->getName().at(0) == c){
+                    chain.push_back(fullDeck[i]);
+                }
+            }
+        }
+    }
+}
 
 /**
  * Returns the coin value of chain based on length.
@@ -94,4 +114,5 @@ Chain<T> &Chain<T>::operator+=(Card * c) {
     }
 
 }
+#endif
 

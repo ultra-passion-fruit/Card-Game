@@ -46,7 +46,7 @@ CardFactory::~CardFactory() {
  * Returns a shuffled Deck of all 104 cards.
  * @return A shuffled Deck.
  */
-Deck CardFactory::getDeck() {
+Deck CardFactory::getDeck() const {
     std::random_device rdm;
     std::mt19937 g(rdm());
 

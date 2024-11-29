@@ -1,3 +1,6 @@
+#pragma once
+#ifndef TRADEAREA_H
+#define TRADEAREA_H
 #include <list>
 #include <istream>
 #include <ostream>
@@ -18,3 +21,5 @@ class TradeArea : public std::list<Card*> {
         TradeArea& operator+=(Card*);
         friend std::ostream& operator<<(std::ostream&, const TradeArea&);
 };
+
+#endif

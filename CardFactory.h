@@ -1,3 +1,6 @@
+#pragma once
+#ifndef CARDFACTORY_H
+#define CARDFACTORY_H
 #include "Deck.h"
 #include <random>
 #include <algorithm>
@@ -21,7 +24,7 @@ private:
     redSz = 8,
     gardenSz = 6;
 
-    Deck d; // A deck of 104 cards
+    mutable Deck d; // A deck of 104 cards
 
     // The constructor, copy constructor, and destructor are declared private to ensure
     // that once created, no other classes can temper with the CardFactory instance and
@@ -32,5 +35,7 @@ private:
 
 public:
     static CardFactory* getFactory();
-    Deck getDeck();
+    Deck getDeck() const;
 };
+
+#endif

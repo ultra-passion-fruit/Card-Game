@@ -1,7 +1,21 @@
 //Implementation for discardpile
 #include "DiscardPile.h"
 
-DiscardPile::DiscardPile(std::istream &, const CardFactory *) {}
+DiscardPile::DiscardPile(std::istream & is, const CardFactory * cardFactory) {
+    std::string ln;
+    std::vector<bool> got(104, false);
+    std::getline(is, ln);
+    Deck fullDeck = cardFactory->getDeck();
+    for(char& c: ln){
+        if(c != ' '){
+            for(int i = 0; i < 104; i++){
+                if(!got[i] && fullDeck[i]->getName().at(0) == c){
+                    discardPile.push_back(fullDeck[i]);
+                }
+            }
+        }
+    }
+}
 
 /**
  * Adds a provided card to the discard pile.

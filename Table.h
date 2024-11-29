@@ -1,3 +1,6 @@
+#pragma once
+#ifndef TABLE_H
+#define TABLE_H
 #include "Player.h"
 #include "Deck.h"
 #include "DiscardPile.h"
@@ -28,3 +31,5 @@ class Table {
         friend std::ostream& operator<<(std::ostream&, Table&);
 
 };
+
+#endif

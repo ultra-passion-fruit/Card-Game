@@ -1,3 +1,6 @@
+#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 #include <istream>
 #include <ostream>
 #include "Card.h"
@@ -28,3 +31,5 @@ class Player {
         std::ostream& printHand(std::ostream&, bool);
         friend std::ostream& operator<<(std::ostream&, const Player&);
 };
+
+#endif

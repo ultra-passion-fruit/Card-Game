@@ -1,3 +1,6 @@
+#pragma once
+#ifndef HAND_H
+#define HAND_H
 #include <istream>
 #include <list>
 #include <queue>
@@ -22,3 +25,5 @@ class Hand : public std::queue<Card*, std::list<Card*>> {
         Card* operator[](int);
         friend std::ostream& operator<<(std::ostream&, const Hand&);
 };
+
+#endif

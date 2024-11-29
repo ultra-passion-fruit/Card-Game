@@ -1,3 +1,6 @@
+#pragma once
+#ifndef CHAIN_BASE_H
+#define CHAIN_BASE_H
 #include <istream>
 #include "CardFactory.h"
 
@@ -14,3 +17,4 @@ class Chain_Base {
         // Print the chain according to specified format.
         virtual void print(std::ostream&) = 0;
 };
+#endif

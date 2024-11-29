@@ -1,7 +1,21 @@
 // This is implementation of the Deck class
 #include "Deck.h"
 
-Deck::Deck(std::istream & is, class CardFactory * cardFactory) {}
+Deck::Deck(std::istream & is, const CardFactory * cardFactory) {
+    std::string ln;
+    std::vector<bool> got(104, false);
+    std::getline(is, ln);
+    Deck fullDeck = cardFactory->getDeck();
+    for(char& c: ln){
+        if(c != ' '){
+            for(int i = 0; i < 104; i++){
+                if(!got[i] && fullDeck[i]->getName().at(0) == c){
+                    push_back(fullDeck[i]);
+                }
+            }
+        }
+    }
+}
 
 /**
  * Shuffles the deck.
@@ -37,3 +51,5 @@ std::ostream &operator<<(std::ostream & os, Deck & deck) {
     }
     return os;
 }
+
+
