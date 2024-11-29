@@ -1,7 +1,7 @@
 // This is implementation of the Deck class
 #include "Deck.h"
 
-Deck::Deck(std::istream &, class CardFactory *) {}
+Deck::Deck(std::istream & is, class CardFactory * cardFactory) {}
 
 /**
  * Shuffles the deck.
