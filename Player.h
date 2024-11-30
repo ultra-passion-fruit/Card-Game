@@ -24,6 +24,7 @@ class Player {
         int getNumCoins();
         int getMaxNumChains();
         int getNumChains();
+        Card* play();
         void buyThirdChain();
         void sellChain();
         Player& operator+=(int);

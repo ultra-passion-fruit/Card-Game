@@ -13,7 +13,7 @@ class Chain_Base {
         ~Chain_Base() = default;
 
         virtual int sell() = 0;
-
+        virtual Chain_Base& operator+=(Card*) = 0;
         // Print the chain according to specified format.
         virtual void print(std::ostream&) = 0;
 };

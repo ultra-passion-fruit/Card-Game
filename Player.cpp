@@ -43,6 +43,10 @@ int Player::getMaxNumChains() {
     return chains.size();
 }
 
+Card* Player::play() {
+    return hand.play();
+}
+
 /*
 * Adds a new chain to the player.
 */

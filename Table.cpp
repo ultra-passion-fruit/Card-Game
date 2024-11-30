@@ -95,16 +95,132 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
         std::cout << "Discarding all cards in the trade area..." << std::endl;
         tradeArea.clear();
     } else {
+        if (fromHand)
+        {   
+            ////// Getting current player top card from hand //////
+            Card* card = current->play();
 
+            ////// Getting chain to place card into //////
+            int chainChoice;
+            bool correct = true;
+            do {
+                std::cout << "\nInto which chain to add card?" << std::endl;
+                std::cout << "Enter the chain number: " << std::endl;
+                std::cin >> chainChoice;
+                
+                // checking user input
+                if (chainChoice < 1 || chainChoice > current->getNumChains())
+                {
+                    correct = false;
+                    std::cout << "No such chain. Try a number between 1 and " << current->getNumChains() << std::endl;
+                } else {
+                    // try adding card to chain
+
+                    // subtract to make up for index
+                    chainChoice--;
+                    try {
+                        // linter refuses to accet current[chainChoice]
+                            // so just wrote it explicitly
+                        current->operator[](chainChoice)+=card;
+                        correct = true;
+                    } catch (IllegalType e) {
+                        correct = false;
+                        std::cout << e.what() << std::endl;
+                        std::cout << "Try again." << std::endl;
+                    }
+                }
+            } while (!correct);
+
+        } else {
+            // from trade area
+            
+            char pick = 'y';
+            do {
+                ////// Getting card from trade area //////
+                std::cout << "Pick a card from the trade area." << std::endl;
+                
+                Card* card;
+                bool found = true;
+                std::string beanChoice;
+                do {
+                    std::cout << "\nEnter the bean name: " << std::endl;
+                    std::cin >> beanChoice;
+                    try {
+                        // getting card from trade area
+                        card = tradeArea.trade(beanChoice);
+                        found = true;
+                    } catch (std::invalid_argument e) {
+                        found = false;
+                        std::cout << e.what() << std::endl;
+                    }
+                } while (!found);
+                
+                ////// Getting chain to place card into //////
+                int chainChoice;
+                bool correct = true;
+                do {
+                    std::cout << "\nInto which chain to add card?" << std::endl;
+                    std::cout << "Enter the chain number: " << std::endl;
+                    std::cin >> chainChoice;
+
+                    if (chainChoice < 1 || chainChoice > current->getNumChains())
+                    {
+                        correct = false;
+                        std::cout << "No such chain. Try a number between 1 and " << current->getNumChains() << std::endl;
+                    } else {
+                        // try adding card to chain
+
+                        // subtract to make up for index
+                        chainChoice--;
+                        try {
+                            // adding card to chain
+                            // linter refuses to accet current[chainChoice] so just wrote it explicitly
+                            current->operator[](chainChoice)+=card;
+                            correct = true;
+                        } catch (IllegalType e) {
+                            correct = false;
+                            std::cout << e.what() << std::endl;
+                            std::cout << "Try again." << std::endl;
+                        }
+                    }
+                } while (!correct);
+                
+                std::cout << "Would you like to pick another card? (y/n)" << std::endl;
+            } while (pick == 'y');
+        }
     }
-    
 }
 
 std::ostream& operator<<(std::ostream& os, Table& table) {
     // Display Trade Area
+    os << table.tradeArea << std::endl;
 
     // On new line, display discard pile (first card)
+    os << table.discardPile.top() << std::endl;
+    
+    // add player 1 hand to output stream
+    os << "Player 1 Hand: ";
+    table.player1.printHand(os, false);
 
-    // printing player hands
-    table.printHand();
+    // show player 1 chains
+    os << "Player 1 Chains:" << std::endl;
+    for (int i = 0; i < table.player1.getNumChains(); i++)
+    {   
+        os << "(" << i+1 << ")";
+        table.player1[i].print(os); os << "\n";
+    }
+    
+    // add player 2 hand to output stream 
+    os << "Player 2 Hand: ";
+    table.player2.printHand(os, false); 
+
+    // show player 2 chains
+    os << "Player 1 Chains:" << std::endl;
+    for (int i = 0; i < table.player2.getNumChains(); i++)
+    {   
+        os << "(" << i+1 << ")";
+        table.player2[i].print(os); os << "\n";
+    }
+
+    return os;
 }

@@ -2,6 +2,7 @@
 #ifndef CHAIN_H
 #define CHAIN_H
 #include <istream>
+#include <exception>
 #include "Chain_Base.h"
 #include "CardFactory.h"
 
@@ -11,10 +12,10 @@
 // A template class will have to created for Chain being parametric in the type of card. In this
 // project, we will instantiate Chain for the corresponding bean card.
 
-class IllegalType: public _exception{
+class IllegalType: public std::exception{
 public:
     IllegalType() = default;
-    const char* what() const {return "Card type mismatch.";}
+    virtual const char* what() const noexcept {return "Card type mismatch.";}
 };
 
 template <class T> class Chain : public Chain_Base {
@@ -27,7 +28,7 @@ public:
     int sell() override;
     void print(std::ostream&) override;
 
-    Chain<T>& operator+=(Card*);
+    Chain<T>& operator+=(Card*) override;
 
 
     /**

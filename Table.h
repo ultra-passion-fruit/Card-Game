@@ -5,6 +5,7 @@
 #include "Deck.h"
 #include "DiscardPile.h"
 #include "TradeArea.h"
+#include "Chain.h"
 
 class Table {
     private:
