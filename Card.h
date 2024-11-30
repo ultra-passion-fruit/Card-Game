@@ -3,6 +3,7 @@
 #define CARD_GAME_CARD_H
 #include <string>
 #include <ostream>
+#include <array>
 
 // Card will be an abstract base class and the eight different bean cards will be derived from it
 // (inheritance). All containers will hold cards through the base type. However, standard containers
@@ -16,11 +17,16 @@ class Card {
     protected:
         int valTable[4];
     public:
-        explicit Card(const int chainVal[4]){
+        Card(const std::array<int, 4>& chainVal){
             for(int i = 0; i < 4; i++){
                 valTable[i] = chainVal[i];
             }
         }
+        // explicit Card(const int chainVal[4]){
+        //     for(int i = 0; i < 4; i++){
+        //         valTable[i] = chainVal[i];
+        //     }
+        // }
         Card(const Card&) = delete;
         Card& operator=(const Card&) = delete;
 
@@ -43,7 +49,7 @@ class Card {
 
 class Blue: public Card {
     friend class CardFactory;
-    Blue(): Card((const int[4]){3,6,8,9}){}
+    Blue(): Card({3,6,8,9}){}
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -52,7 +58,7 @@ public:
 
 class Chili: public Card {
     friend class CardFactory;
-    Chili(): Card((const int[4]){3,6,8,9}){}
+    Chili(): Card({3,6,8,9}){}
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -61,7 +67,7 @@ public:
 
 class Stink: public Card {
     friend class CardFactory;
-    Stink(): Card((const int[4]){3, 6,8,9}){}
+    Stink(): Card({3, 6,8,9}){}
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -70,7 +76,7 @@ public:
 
 class Green: public Card {
     friend class CardFactory;
-    Green(): Card((const int[4]){3,5,6,7}){}
+    Green(): Card({3,5,6,7}){}
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -79,7 +85,7 @@ public:
 
 class Soy: public Card {
     friend class CardFactory;
-    Soy(): Card((const int[4]){2,4,5,6}){}
+    Soy(): Card({2,4,5,6}){}
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -88,7 +94,7 @@ public:
 
 class Black: public Card {
     friend class CardFactory;
-    Black(): Card((const int[4]){2,4,5,6}){}
+    Black(): Card({2,4,5,6}){}
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -97,7 +103,7 @@ public:
 
 class Red: public Card {
     friend class CardFactory;
-    Red(): Card((const int[4]){2,3,4,5}){}
+    Red(): Card({2,3,4,5}){}
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -106,7 +112,7 @@ public:
 
 class Garden: public Card {
     friend class CardFactory;
-    Garden(): Card((const int[4]){-1,2,3,-1}){}
+    Garden(): Card({-1,2,3,-1}){}
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
