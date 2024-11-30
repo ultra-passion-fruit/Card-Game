@@ -60,6 +60,13 @@ Card* Player::play() {
 }
 
 /*
+* Adds card to player's hand.
+*/
+void Player::pickUp(Card* card) {
+    hand+=card;
+}
+
+/*
 * Discards a card from the player's hand. Another silly wrapper function.
 */
 Card* Player::disCard(int i) {

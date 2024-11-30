@@ -191,6 +191,9 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
     }
 }
 
+/*
+* Allows player to sell a desired chain.
+*/
 void Table::playerSellChain() {
 
 }
@@ -229,12 +232,20 @@ void Table::playerDiscards() {
     } while (!correct);
 }
 
+/*
+* Draws a bunch of card everywhere.
+*/
 void Table::lastDraw() {
-
+    
 }
 
+/*
+* Draws 2 cards from deck into current player's hand.
+*/
 void Table::finishTurn() {
-    
+    // does it twice
+    current->pickUp(deck.draw());
+    current->pickUp(deck.draw());
 }
 
 std::ostream& operator<<(std::ostream& os, Table& table) {

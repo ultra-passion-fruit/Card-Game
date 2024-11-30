@@ -26,6 +26,7 @@ class Player {
         int getNumChains();
         int handSize();
         Card* play();
+        void pickUp(Card*);
         Card* disCard(int);
         void buyThirdChain();
         void sellChain();
