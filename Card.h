@@ -17,11 +17,12 @@ class Card {
     protected:
         int valTable[4];
     public:
-        Card(const std::array<int, 4>& chainVal){
-            for(int i = 0; i < 4; i++){
-                valTable[i] = chainVal[i];
-            }
-        }
+        Card() = default;
+        // Card(const std::array<int, 4>& chainVal){
+        //     for(int i = 0; i < 4; i++){
+        //         valTable[i] = chainVal[i];
+        //     }
+        // }
         // explicit Card(const int chainVal[4]){
         //     for(int i = 0; i < 4; i++){
         //         valTable[i] = chainVal[i];
@@ -49,7 +50,13 @@ class Card {
 
 class Blue: public Card {
     friend class CardFactory;
-    Blue(): Card({3,6,8,9}){}
+    // std::vector<int> valTable;
+    Blue(){
+        valTable[0] = 3;
+        valTable[1] = 6;
+        valTable[2] = 8;
+        valTable[3] = 9;
+    }
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -58,7 +65,13 @@ public:
 
 class Chili: public Card {
     friend class CardFactory;
-    Chili(): Card({3,6,8,9}){}
+    // std::vector<int> valTable;
+    Chili(){
+        valTable[0] = 3;
+        valTable[1] = 6;
+        valTable[2] = 8;
+        valTable[3] = 9;
+    }
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -67,7 +80,13 @@ public:
 
 class Stink: public Card {
     friend class CardFactory;
-    Stink(): Card({3, 6,8,9}){}
+    // std::vector<int> valTable;
+    Stink(){
+        valTable[0] = 3;
+        valTable[1] = 6;
+        valTable[2] = 8;
+        valTable[3] = 9;
+    }
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -76,7 +95,13 @@ public:
 
 class Green: public Card {
     friend class CardFactory;
-    Green(): Card({3,5,6,7}){}
+    // std::vector<int> valTable;
+    Green(){
+        valTable[0] = 3;
+        valTable[1] = 6;
+        valTable[2] = 8;
+        valTable[3] = 9;
+    }
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -85,7 +110,13 @@ public:
 
 class Soy: public Card {
     friend class CardFactory;
-    Soy(): Card({2,4,5,6}){}
+    // std::vector<int> valTable;
+    Soy(){
+        valTable[0] = 2;
+        valTable[1] = 4;
+        valTable[2] = 5;
+        valTable[3] = 6;
+    }
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -94,7 +125,13 @@ public:
 
 class Black: public Card {
     friend class CardFactory;
-    Black(): Card({2,4,5,6}){}
+    // std::vector<int> valTable;
+    Black(){
+        valTable[0] = 2;
+        valTable[1] = 4;
+        valTable[2] = 5;
+        valTable[3] = 6;
+    }
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -103,7 +140,13 @@ public:
 
 class Red: public Card {
     friend class CardFactory;
-    Red(): Card({2,3,4,5}){}
+    // std::vector<int> valTable;
+    Red() {
+        valTable[0] = 2;
+        valTable[1] = 3;
+        valTable[2] = 4;
+        valTable[3] = 5;
+    }
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
@@ -112,7 +155,13 @@ public:
 
 class Garden: public Card {
     friend class CardFactory;
-    Garden(): Card({-1,2,3,-1}){}
+    // std::vector<int> valTable;
+    Garden(){
+        valTable[0] = -1;
+        valTable[1] = 2;
+        valTable[2] = 3;
+        valTable[3] = -1;
+    }
 public:
     int getCardsPerCoin(int) override;
     std::string getName() const override;
