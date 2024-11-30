@@ -1,5 +1,6 @@
 // This is implementation of the Deck class
 #include "Deck.h"
+#include "CardFactory.h"
 
 Deck::Deck(std::istream & is, const CardFactory * cardFactory) {
     std::string ln;

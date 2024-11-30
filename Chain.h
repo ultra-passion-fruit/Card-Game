@@ -5,6 +5,7 @@
 #include <exception>
 #include "Chain_Base.h"
 #include "CardFactory.h"
+#include "Card.h"
 
 // Chain is also a container and will have to grow and shrink as the game progresses. Again
 // insertion is only to one end of the chain and a std::vector is fine (see below).
@@ -15,7 +16,7 @@
 class IllegalType: public std::exception{
 public:
     IllegalType() = default;
-    virtual const char* what() const noexcept {return "Card type mismatch.";}
+    const char* what() const noexcept {return "Card type mismatch.";}
 };
 
 template <class T> class Chain : public Chain_Base {
