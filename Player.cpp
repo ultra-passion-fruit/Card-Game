@@ -18,6 +18,16 @@ Player::Player(std::istream& inputStream, const CardFactory*) {
 
 }
 
+/**
+ * Destructor for Player class. Deleted Chain_Base references
+ * inside the chains vector.
+ */
+Player::~Player() {
+    for (Chain_Base* chain : chains) {
+        delete chain;
+    }
+}
+
 /*
 * Getter for player name.
 @return name
@@ -34,11 +44,19 @@ int Player::getNumCoins() {
     return numOfCoins;
 }
 
-/*
+/**
 * Getter for number of coins.
-@return numOfCoins
+* @return numOfCoins
 */
 int Player::getMaxNumChains() {
+    return chains.size();
+}
+
+/**
+ * Returns the number of chains the player has.
+ * @return int
+ */
+int Player::getNumChains() {
     return chains.size();
 }
 
@@ -84,6 +102,13 @@ void Player::buyThirdChain() {
     }
 }
 
+/**
+ * Sells a player's chain.
+ */
+void sellChain() {
+    // idk
+}
+
 /*
 * += operator to add coins to player object
 @return Player& (a Player reference)
@@ -103,7 +128,7 @@ Player& Player::operator+= (int newCoins) {
 Chain_Base& Player::operator[](int i) {
     if (i < maxNumChains && i > -1)
     {
-        return chains[i];
+        return *(chains[i]);
     } else {
         throw std::out_of_range("Index out of range.");
     }

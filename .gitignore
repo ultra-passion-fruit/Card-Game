@@ -1,1 +1,15 @@
-.vscode/ 
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
+/build
+main.o
+Card.o
+CardFactory.o
+Deck.o
+DiscardPile.o
+Hand.o
+Table.o
+Player.o
+TradeArea.o
+myCardGame

@@ -7,9 +7,9 @@
 #include <algorithm>
 #include <random>
 #include "Card.h"
-#include "CardFactory.h"
+// #include "CardFactory.h"
 
-// class CardFactory;
+class CardFactory;
 
 // Deck will initially hold all the cards which will have to be shuffled to produce a randomized
 // order, then players' hands are dealt and during game play players draw cards from the Deck.

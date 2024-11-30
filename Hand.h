@@ -16,14 +16,14 @@
 class Hand : public std::queue<Card*, std::list<Card*> > {
     public:
         Hand();
-        Hand(std::istream&, const CardFactory*);
-        ~Hand();
+        // Hand(std::istream&, const CardFactory*);
+        // ~Hand();
         std::list<Card*> getContainer();
         Hand& operator+=(Card*);
         Card* play();
         Card* top();
         Card* operator[](int);
-        friend std::ostream& operator<<(std::ostream&, const Hand&);
+        friend std::ostream& operator<<(std::ostream&, Hand&);
 };
 
 #endif

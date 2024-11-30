@@ -14,9 +14,9 @@ class Player {
         std::string name;
         int numOfCoins;
         int maxNumChains;
-        std::vector<Chain_Base> chains;
+        std::vector<Chain_Base*> chains;
     public:
-        Player();
+        Player() = default;
         Player(std::string&);
         Player(std::istream&, const CardFactory*);
         ~Player();

@@ -39,6 +39,13 @@ Card* DiscardPile::pickUp() {
 }
 
 /**
+ * Returns true if vector is empty.
+ */
+bool DiscardPile::empty() {
+    return discardPile.empty();
+}
+
+/**
  * Returns but does not remove a card from the top of the discard pile.
  * @return The top card.
  */

@@ -3,6 +3,7 @@
 #define CHAIN_H
 #include <istream>
 #include <exception>
+#include <stdexcept>
 #include "Chain_Base.h"
 #include "CardFactory.h"
 #include "Card.h"
@@ -13,11 +14,11 @@
 // A template class will have to created for Chain being parametric in the type of card. In this
 // project, we will instantiate Chain for the corresponding bean card.
 
-class IllegalType: public std::exception{
-public:
-    IllegalType() = default;
-    const char* what() const noexcept {return "Card type mismatch.";}
-};
+// class IllegalType: public std::exception{
+// public:
+//     IllegalType() = default;
+//     const char* what() const noexcept {return "Card type mismatch.";}
+// };
 
 template <class T> class Chain : public Chain_Base {
 private:
@@ -110,7 +111,8 @@ template <class T>
 Chain<T> &Chain<T>::operator+=(Card * c) {
     T* type = dynamic_cast<T*>(c);
     if(!type){
-        throw IllegalType();
+        // throw IllegalType();
+        throw std::invalid_argument("Card type mismatch.");
     } else {
         chain.push_back(type);
         return *this;

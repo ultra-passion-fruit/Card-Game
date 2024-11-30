@@ -12,14 +12,13 @@
 
 class TradeArea : public std::list<Card*> {
     public:
-        TradeArea(std::istream&, const CardFactory*);
+        // TradeArea(std::istream&, const CardFactory*);
         TradeArea();
-        ~TradeArea();
         int numCards();
         bool legal(Card*);
         Card* trade(std::string);
         TradeArea& operator+=(Card*);
-        friend std::ostream& operator<<(std::ostream&, const TradeArea&);
+        friend std::ostream& operator<<(std::ostream&, TradeArea&);
 };
 
 #endif

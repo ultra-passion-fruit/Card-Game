@@ -22,6 +22,10 @@ Table::Table(Player p1, Player p2, CardFactory* fact) {
     tradeArea = TradeArea();
 }
 
+Table::~Table() {
+    delete current;
+}
+
 /*
 * Returns true if a player has won.
 * Checks if the deck is empty. If so, checks which player
@@ -30,7 +34,7 @@ Table::Table(Player p1, Player p2, CardFactory* fact) {
 *@return bool
 */
 bool Table::win(std::string& winnerName) {
-    if (!empty(deck))
+    if (!deck.empty())
     {
         return false;
     } else {
@@ -82,6 +86,13 @@ Player* Table::getCurrent() {
     return current;
 }
 
+/**
+ * Returns true if discard pile is empty.
+ */
+bool Table::discardIsEmpty() {
+    return discardPile.empty();
+}
+
 /*
 * Will let player add cards to chains.
 * When allowDiscard=true, player can choose to discard all cards in Trade Area.
@@ -123,7 +134,7 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                             // so just wrote it explicitly
                         current->operator[](chainChoice)+=card;
                         correct = true;
-                    } catch (IllegalType e) {
+                    } catch (std::invalid_argument e) {
                         correct = false;
                         std::cout << e.what() << std::endl;
                         std::cout << "Try again." << std::endl;
@@ -177,7 +188,7 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                             // linter refuses to accet current[chainChoice] so just wrote it explicitly
                             current->operator[](chainChoice)+=card;
                             correct = true;
-                        } catch (IllegalType e) {
+                        } catch (std::invalid_argument e) {
                             correct = false;
                             std::cout << e.what() << std::endl;
                             std::cout << "Try again." << std::endl;
