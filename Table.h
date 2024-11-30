@@ -25,7 +25,6 @@ class Table {
         Player* getCurrent();
         bool discardIsEmpty();
         void addToChains(bool, bool);
-        void playerPlay();
         void playerSellChain();
         void playerDiscards();
         void lastDraw();

@@ -48,7 +48,7 @@ Card* Hand::top() {
 }
 
 /*
-* Return the Card at the specified position.
+* Returns and removes the Card at the specified position.
 * Indexed from 0.
 * @return Card pointer
 * @throws out_of_range
@@ -58,7 +58,7 @@ Card* Hand::operator[](int i) {
     if (i < this->size() && i > -1)
     {
         std::advance(it, i);
-        return *it;
+        return *this->c.erase(it);
     } else {
         throw std::out_of_range("Index out of range");
     }

@@ -191,6 +191,52 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
     }
 }
 
+void Table::playerSellChain() {
+
+}
+
+/*
+* Will let player choose a card to discard from their hand.
+*/
+void Table::playerDiscards() {
+    ////// Getting card from hand //////
+    std::cout << "Pick a card from your hand." << std::endl;
+    current->printHand(std::cout, true);
+    
+    std::cout << "\nFirst card is 1, second is 2, etc." << std::endl;
+
+    Card* card;
+    bool correct = true;
+    int position;
+    do {
+        std::cout << "Enter the position: ";
+        std::cin >> position;
+        if (position < 1 || position > current->handSize())
+        {
+            correct = false;
+            std::cout << "No such position. Try a number between 1 and " << current->handSize() << std::endl;
+        } else {
+            // getting card from hand and moving to discard pile
+            position--;
+            correct = true;
+            try {
+                discardPile += current->disCard(position);
+            } catch (std::out_of_range e) {
+                std::cout << e.what();
+                std::cout << "Try again.";
+            }
+        }
+    } while (!correct);
+}
+
+void Table::lastDraw() {
+
+}
+
+void Table::finishTurn() {
+    
+}
+
 std::ostream& operator<<(std::ostream& os, Table& table) {
     // Display Trade Area
     os << table.tradeArea << std::endl;

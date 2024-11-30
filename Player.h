@@ -24,7 +24,9 @@ class Player {
         int getNumCoins();
         int getMaxNumChains();
         int getNumChains();
+        int handSize();
         Card* play();
+        Card* disCard(int);
         void buyThirdChain();
         void sellChain();
         Player& operator+=(int);

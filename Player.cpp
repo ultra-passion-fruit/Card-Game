@@ -43,8 +43,27 @@ int Player::getMaxNumChains() {
     return chains.size();
 }
 
+/*
+* Returns size of the player's hand 😏
+*@return int
+*/
+int Player::handSize() {
+    return hand.size();
+}
+
+/*
+* Gets the top card from the hand. Just a silly wrapper function
+* because someone decided to make the class structure like this.
+*/
 Card* Player::play() {
     return hand.play();
+}
+
+/*
+* Discards a card from the player's hand. Another silly wrapper function.
+*/
+Card* Player::disCard(int i) {
+    return hand[i];
 }
 
 /*
