@@ -8,9 +8,8 @@
 Player::Player(std::string& inputName) : 
     name(inputName),
     numOfCoins(0),
-    maxNumChains(2) {
-        chains.resize(maxNumChains);
-    }
+    maxNumChains(2),
+    chains(2) {}
 
 /*
 * Constructor for create from file save.
