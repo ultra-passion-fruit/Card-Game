@@ -74,9 +74,9 @@ bool Table::changeCurrent() {
     return false;
 }
 
-/*
-* Returns the player whose turn it currently is.
-*@return Player pointer
+/**
+ * Returns the player whose turn it currently is.
+ * @return Player pointer
 */
 Player* Table::getCurrent() {
     return current;
@@ -236,7 +236,34 @@ void Table::playerDiscards() {
 * Draws a bunch of card everywhere.
 */
 void Table::lastDraw() {
+    // drawing 3 cards into trade area
+    for (int i = 0; i < 3; i++)
+    {
+        tradeArea += deck.draw();
+    }
     
+    // grabbing firs card from discard pile
+    Card* card;
+    if (!discardIsEmpty())
+    {
+        card = discardPile.pickUp();
+    } else {
+        std::cout << "Discard pile is empty." << std::endl;
+    }
+
+    // adding cards from discard pile into trade area until illegal or no more cards
+    while (tradeArea.legal(card))
+    {
+        tradeArea+= card;
+
+        if (!discardIsEmpty())
+        {
+            card = discardPile.pickUp();
+        } else {
+            std::cout << "Discard pile is empty." << std::endl;
+        }
+    }
+    std::cout << "No more matching beans in trade area." << std::endl;
 }
 
 /*
