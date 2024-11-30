@@ -41,7 +41,7 @@ void main() {
         // else
         
         // P1 starting player
-        std::cout << p1.getName() << ", it is your turn." << std::endl;
+        std::cout << table.getCurrent()->getName() << ", it is your turn." << std::endl;
 
         // display table
             // shows deck, trade area and player hands
