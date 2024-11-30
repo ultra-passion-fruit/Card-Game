@@ -21,6 +21,7 @@ class Table {
         bool win(std::string&);
         void printHand(bool);
         bool changeCurrent();
+        Player* getCurrent();
         bool discardIsEmpty();
         void addToChains(bool, bool);
         void playerPlay();

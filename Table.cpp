@@ -75,6 +75,14 @@ bool Table::changeCurrent() {
 }
 
 /*
+* Returns the player whose turn it currently is.
+*@return Player pointer
+*/
+Player* Table::getCurrent() {
+    return current;
+}
+
+/*
 * Will let player add cards to chains.
 * When allowDiscard=true, player can choose to discard all cards in Trade Area.
 * When fromHand=true, card to add is topmost card from hand, otherwise is from Trade Area.
@@ -82,7 +90,14 @@ bool Table::changeCurrent() {
 * @param fromHand
 */
 void Table::addToChains(bool allowDiscard, bool fromHand) {
+    if (allowDiscard)
+    {
+        std::cout << "Discarding all cards in the trade area..." << std::endl;
+        tradeArea.clear();
+    } else {
 
+    }
+    
 }
 
 std::ostream& operator<<(std::ostream& os, Table& table) {
