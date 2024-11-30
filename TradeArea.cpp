@@ -35,21 +35,6 @@ bool TradeArea::legal(Card* card) {
 }
 
 /*
-* Returns output stream with the bean types currently in the trade area.
-*@return ostream reference
-*/
-std::ostream& TradeArea::showBeans(std::ostream& os) {
-    os << "[";
-    std::list<Card*>::iterator it;
-    for (it = this->begin(); it != (this->end())--; it++)
-    {
-        os << (*it)->getName() << ", ";
-    }
-    os << (*it)->getName() << "]";
-    return os;
-}
-
-/*
 * Removes a card with the specified bean name from the trade area.
 * @param beanName
 * @return Card pointer
