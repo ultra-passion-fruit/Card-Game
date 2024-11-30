@@ -24,6 +24,7 @@ private:
     // The chain.
     std::vector<T*> chain;
 public:
+    Chain() = default;
     Chain(std::istream&, const CardFactory*);
     int sell() override;
     void print(std::ostream&) override;
