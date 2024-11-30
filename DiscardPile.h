@@ -1,6 +1,6 @@
-#pragma once
-#ifndef DISCARDPILE_H
-#define DISCARDPILE_H
+// #pragma once
+#ifndef CARD_GAME_DISCARDPILE_H
+#define CARD_GAME_DISCARDPILE_H
 #include <vector>
 #include <istream>
 #include <ostream>

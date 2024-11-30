@@ -1,6 +1,6 @@
-#pragma once
-#ifndef HAND_H
-#define HAND_H
+// #pragma once
+#ifndef CARD_GAME_HAND_H
+#define CARD_GAME_HAND_H
 #include <istream>
 #include <list>
 #include <queue>

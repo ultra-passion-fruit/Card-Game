@@ -1,6 +1,6 @@
-#pragma once
-#ifndef CARDFACTORY_H
-#define CARDFACTORY_H
+// #pragma once
+#ifndef CARD_GAME_CARDFACTORY_H
+#define CARD_GAME_CARDFACTORY_H
 #include "Deck.h"
 #include <random>
 #include <algorithm>

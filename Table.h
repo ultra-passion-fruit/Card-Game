@@ -1,6 +1,6 @@
-#pragma once
-#ifndef TABLE_H
-#define TABLE_H
+// #pragma once
+#ifndef CARD_GAME_TABLE_H
+#define CARD_GAME_TABLE_H
 #include "Player.h"
 #include "Deck.h"
 #include "DiscardPile.h"

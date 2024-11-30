@@ -1,6 +1,6 @@
-#pragma once
-#ifndef TRADEAREA_H
-#define TRADEAREA_H
+// #pragma once
+#ifndef CARD_GAME_TRADEAREA_H
+#define CARD_GAME_TRADEAREA_H
 #include <list>
 #include <istream>
 #include <ostream>

@@ -1,6 +1,6 @@
-#pragma once
-#ifndef PLAYER_H
-#define PLAYER_H
+// #pragma once
+#ifndef CARD_GAME_PLAYER_H
+#define CARD_GAME_PLAYER_H
 #include <istream>
 #include <ostream>
 #include "Card.h"

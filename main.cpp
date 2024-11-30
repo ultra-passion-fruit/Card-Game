@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "Table.h"
 
-void main() {
+int main() {
     // creating factory
     CardFactory* factory = CardFactory::getFactory();;
     std::cout << "Welcome to Card Game!" << std::endl;

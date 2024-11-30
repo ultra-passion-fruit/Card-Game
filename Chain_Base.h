@@ -1,6 +1,6 @@
-#pragma once
-#ifndef CHAIN_BASE_H
-#define CHAIN_BASE_H
+// #pragma once
+#ifndef CARD_GAME_CHAIN_BASE_H
+#define CARD_GAME_CHAIN_BASE_H
 #include <istream>
 #include "CardFactory.h"
 

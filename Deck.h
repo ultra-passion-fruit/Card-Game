@@ -1,6 +1,6 @@
-#pragma once
-#ifndef DECK_H
-#define DECK_H
+// #pragma once
+#ifndef CARD_GAME_DECK_H
+#define CARD_GAME_DECK_H
 #include <vector>
 #include <sstream>
 #include <iostream>

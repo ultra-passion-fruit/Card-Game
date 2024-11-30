@@ -1,6 +1,6 @@
-#pragma once
-#ifndef CARD_H
-#define CARD_H
+// #pragma once
+#ifndef CARD_GAME_CARD_H
+#define CARD_GAME_CARD_H
 #include <string>
 #include <ostream>
 
