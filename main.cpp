@@ -36,13 +36,18 @@ void main() {
     while (!table.win(winner))
     {
         // if PAUSE then save game (to file) and exit
+            // TODO (maybe)
+        
         // else
         
         // P1 starting player
         std::cout << p1.getName() << ", it is your turn." << std::endl;
 
         // display table
+            // shows deck, trade area and player hands
         std:: cout << table << std::endl;
+        
+        //////////   (1)   Pick from trade area to add to chain   //////////
         
         // if trade area not empty
         if(!table.discardIsEmpty())
@@ -64,6 +69,8 @@ void main() {
             // 2nd arg = false, add from trade area, not hand
             table.addToChains(pick, false);
         }
+        
+        //////////   (2)   Place top card from hand in a chain   //////////
         
         char repeat = 'n';
         std::cout << "Choose a chain to place your topmost card." << std::endl;
@@ -88,7 +95,8 @@ void main() {
             std::cin >> repeat;
         } while (repeat == 'y');
 
-        // DISCARD card from hand (OPT)
+        //////////   (3)   Discard a card from hand (OPT)   //////////
+        
         char discard = 'n';        
         std::cout << "Would you like to discard a card from your hand? (y/n) ";
         std::cin >> discard;
@@ -98,11 +106,15 @@ void main() {
             // shows cards to discard and player chooses
             table.playerDiscards();
         }
-            
+        
+        //////////   (4)   New cards added to table   //////////
+
         // DRAW 3 cards from deck and place in trade area
         // DRAW from discard pile as long as same bean trade area
         std::cout << "Drawing 3 cards from deck..." << std::endl;
         table.lastDraw();
+
+        //////////   (5)   Pick from trade area to add to chain  //////////    
 
         // ADD from trade area to chain (OPT)
         char add = 'n';
@@ -113,6 +125,9 @@ void main() {
             // SELECT card to add
             table.addToChains(false, false);
         }
+
+        //////////   (6)   Get cards from deck into hand   //////////
+
         // DRAW 2 cards from deck to current player
         table.finishTurn();
 
