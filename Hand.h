@@ -13,7 +13,7 @@
 // from the middle in Step 4 in the above description of a player's turn. Therefore, we can use a
 // std::list to remove at an arbitrary location efficiently with a std::queue adapter
 
-class Hand : public std::queue<Card*, std::list<Card*>> {
+class Hand : public std::queue<Card*, std::list<Card*> > {
     public:
         Hand();
         Hand(std::istream&, const CardFactory*);

@@ -129,7 +129,5 @@ int main() {
         // CHANGE player
         table.changeCurrent();
     }
-
-        
-
+    return 0;
 }
