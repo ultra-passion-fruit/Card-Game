@@ -3,7 +3,7 @@
 std::ostream& operator<<(std::ostream& os, Card& c){
     os << "| ";
     c.print(os);
-    os << "|";
+    os << "|  ";
     return os;
 }
 

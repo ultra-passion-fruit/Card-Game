@@ -308,36 +308,52 @@ std::ostream& operator<<(std::ostream& os, Table& table) {
     os << table.tradeArea << std::endl;
 
     // On new line, display discard pile (first card)
-    if (!table.discardIsEmpty())
+    if (!table.discardPile.empty())
     {
         os << table.discardPile.top() << std::endl;
-    }    
-    
+    } else {
+        os << "Discard Pile: Empty\n";
+    }
+
+    // show player 1 chains
+    os << "\nPlayer 1 Chains: ";
+    if (table.player1.getNumChains() != 0)
+    {   
+        std::cout << std::endl;
+        for (int i = 0; i < table.player1.getNumChains(); i++)
+            {   
+                os << "(" << i+1 << ")";
+                table.player1[i].print(os); os << "\n";
+            }
+    } else {
+        os << "No Chains.";
+    }
+
+    // show player 1 chains
+    os << "\n\nPlayer 2 Chains: ";
+    if (table.player2.getNumChains() != 0)
+    {   
+        std::cout << std::endl;
+        for (int i = 0; i < table.player2.getNumChains(); i++)
+            {   
+                os << "(" << i+1 << ")";
+                table.player2[i].print(os); os << "\n";
+            }
+    } else {
+        os << "No Chains.";
+    }
+
     // add player 1 hand to output stream
-    os << "Player 1 Hand: ";
+    os << "\n\nPlayer 1 Hand: ";
     table.player1.printHand(os, false);
     std::cout << "\n" << std::endl;
 
-    // show player 1 chains
-    os << "Player 1 Chains:" << std::endl;
-    for (int i = 0; i < table.player1.getNumChains(); i++)
-    {   
-        os << "(" << i+1 << ")";
-        table.player1[i].print(os); os << "\n";
-    }
-    std::cout << "\n\n" << std::endl;
-    
-    // add player 2 hand to output stream 
+    // add player 2 hand to output stream
     os << "Player 2 Hand: ";
-    table.player2.printHand(os, false); 
+    table.player2.printHand(os, false);
+    std::cout << "\n" << std::endl;
 
-    // show player 2 chains
-    os << "Player 1 Chains:" << std::endl;
-    for (int i = 0; i < table.player2.getNumChains(); i++)
-    {   
-        os << "(" << i+1 << ")";
-        table.player2[i].print(os); os << "\n";
-    }
+    
 
     os << "==================";
     return os;

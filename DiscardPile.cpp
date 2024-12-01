@@ -73,6 +73,8 @@ void DiscardPile::print(std::ostream & os) const {
 std::ostream &operator<<(std::ostream & os, const DiscardPile & pile) {
     if(!pile.discardPile.empty()){
         os << pile.top()->getName();
+    } else {
+        os << "Discard Pile: Empty";
     }
     return os;
 }

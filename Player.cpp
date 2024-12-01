@@ -9,7 +9,7 @@ Player::Player(std::string& inputName) :
     name(inputName),
     numOfCoins(0),
     maxNumChains(2),
-    chains(2) {}
+    chains(0) {}
 
 /*
 * Constructor for create from file save.
@@ -49,7 +49,7 @@ int Player::getNumCoins() {
 * @return numOfCoins
 */
 int Player::getMaxNumChains() {
-    return chains.size();
+    return maxNumChains;
 }
 
 /**
@@ -127,7 +127,7 @@ Player& Player::operator+= (int newCoins) {
 * @throws out_of_range
 */
 Chain_Base& Player::operator[](int i) {
-    if (i < maxNumChains && i > -1)
+    if (i < chains.size() && i > -1)
     {
         return *(chains[i]);
     } else {
@@ -137,7 +137,7 @@ Chain_Base& Player::operator[](int i) {
 
 /*
 * Prints player's hand to console.
-* When all=true, prints all cards. Otherwise, only prints top card.
+* When all=true, prints all cards. therwise, only prints top card.
 *@param os
 *@param all
 *@return ostream reference

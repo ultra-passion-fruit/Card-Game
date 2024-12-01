@@ -81,11 +81,12 @@ std::list<Card*> Hand::getContainer() {
 */
 std::ostream& operator<<(std::ostream& os, Hand& hand) {
     std::list<Card*> innerList = hand.getContainer();
-    std::list<Card*>::iterator it = innerList.begin();
+    std::list<Card*>::iterator it;
     if (!innerList.empty())
     {
-        for(Card* card : innerList) {
-            os << card;
+        for (it = innerList.begin(); it != innerList.end(); it++)
+        {
+            os << *(*it);
         }
     }
     return os;

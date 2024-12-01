@@ -7,18 +7,24 @@ int main() {
     CardFactory* factory = CardFactory::getFactory();;
     std::cout << "Welcome to Card Game!" << std::endl;
     // Player 1 input name
-    std::string nameP1;
-    std::cout << "P1 Name: ";
-    std::cin >> nameP1;
+    std::string nameP1 = "Test 1";
+    std::cout << "P1 Name: " << nameP1 << std::endl;
+    ////// COMMENTED OUT FOR TESTING/////
+    // std::cout << "P1 Name: ";
+    // std::cin >> nameP1;
+    /////////////////////////////////////
     Player p1(nameP1);
     
     // Player 2 input name
-    std::string nameP2;
-    std::cout << "P2 Name: ";
-    std::cin >> nameP2;
+    std::string nameP2 = "Test 2";
+    std::cout << "P2 Name: " << nameP2 << std::endl;
+    ////// COMMENTED OUT FOR TESTING/////
+    // std::cout << "P2 Name: ";
+    // std::cin >> nameP2;
+    /////////////////////////////////////
     Player p2(nameP2);
     
-    std::cout << "Great! Let's begin." << std::endl;
+    std::cout << "\nGreat! Let's begin." << std::endl;
 
     // Making Table Object
         // (deals cards in ctor)
@@ -30,6 +36,8 @@ int main() {
 
     // deal 5 cards to each player
     table.startGame();
+
+    std::cout << "\nEach player is dealt 5 cards." << std::endl;
 
     // OR
 
@@ -43,13 +51,14 @@ int main() {
         
         // else
         
-        // P1 starting player
-        std::cout << table.getCurrent()->getName() << ", it is your turn." << std::endl;
-
         // display table
             // shows deck, trade area and player hands
         std:: cout << table << std::endl;
         
+        // P1 starting player
+        std::cout << std::endl;
+        std::cout << table.getCurrent()->getName() << ", it is your turn." << std::endl;
+
         //////////   (1)   Pick from trade area to add to chain   //////////
         
         // if trade area not empty
@@ -76,7 +85,7 @@ int main() {
         //////////   (2)   Place top card from hand in a chain   //////////
         
         char repeat = 'n';
-        std::cout << "Choose a chain to place your topmost card." << std::endl;
+        std::cout << "\nChoose a chain to place your topmost card." << std::endl;
         // REPEAT as long as player wants
         do
         {
