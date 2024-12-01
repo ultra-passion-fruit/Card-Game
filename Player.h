@@ -28,6 +28,7 @@ class Player {
         Card* play();
         void pickUp(Card*);
         Card* disCard(int);
+        void addChain(Chain_Base*);
         void buyThirdChain();
         void sellChain();
         Player& operator+=(int);

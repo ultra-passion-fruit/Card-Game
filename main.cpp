@@ -77,9 +77,15 @@ int main() {
                 std::cin >> pick;
             } while (pick > 2 || pick < 1);
             pick--;
-            // if pick=true, don't discard, pick. Otherwise, discard
-            // 2nd arg = false, add from trade area, not hand
-            table.addToChains(pick, false);
+            char another = 'n';
+            do {
+                // SELECT card to add
+                // if pick=true, don't discard, pick. Otherwise, discard
+                // 2nd arg = false, add from trade area, not hand
+                table.addToChains(pick, false);
+                std::cout << "Would you like to add another card? (y/n) ";
+                std::cin >> another;
+            } while (another == 'y');
         }
         
         //////////   (2)   Place top card from hand in a chain   //////////
@@ -129,8 +135,13 @@ int main() {
         std::cin >> add;
         if (add == 'y')
         {
-            // SELECT card to add
+            char another = 'n';
+            do {
+                // SELECT card to add
             table.addToChains(false, false);
+            std::cout << "Would you like to add another card? (y/n) ";
+            std::cin >> another;
+            } while (another == 'y');
         }
 
         //////////   (6)   Get cards from deck into hand   //////////

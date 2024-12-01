@@ -1,4 +1,5 @@
 #include "Table.h"
+#include "Chain_Base.h"
 #include <stdexcept>
 
 /*
@@ -19,7 +20,7 @@ Table::Table(std::istream& is, const CardFactory* factory) {
 Table::Table(Player p1, Player p2, CardFactory* fact) {
     player1 = p1;
     player2 = p2;
-    current = &p1;
+    current = &player1;
     deck = fact->getDeck();
     discardPile = DiscardPile();
     tradeArea = TradeArea();
@@ -121,19 +122,83 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
         std::cout << "Discarding all cards in the trade area..." << std::endl;
         tradeArea.clear();
     } else {
+        // card to add
+        Card* card;
         if (fromHand)
-        {   
-            ////// Getting current player top card from hand //////
-            Card* card = current->play();
-
-            ////// Getting chain to place card into //////
-            int chainChoice;
-            bool correct = true;
+        {
+            //////    Getting card from current player top of hand      //////
+            card = current->play();
+        } else {
+            //////            Getting card from trade area             //////
+            std::cout << "Pick a card from the trade area." << std::endl;
+            
+            bool found = true;
+            std::string beanChoice;
             do {
-                std::cout << "\nInto which chain to add card?" << std::endl;
-                std::cout << "Enter the chain number: " << std::endl;
+                std::cout << "\nEnter the bean name: " << std::endl;
+                std::cin >> beanChoice;
+                try {
+                    // getting card from trade area
+                    card = tradeArea.trade(beanChoice);
+                    found = true;
+                } catch (std::invalid_argument e) {
+                    found = false;
+                    std::cout << e.what() << std::endl;
+                }
+            } while (!found);
+        }
+        
+        ////// Getting chain to place card into //////
+        int chainChoice = 0; // 0 default if no chain
+        bool correct = true;
+        do {
+            std::cout << "\nInto which chain to add card?" << std::endl;
+            if (current->getNumChains() == 0)
+            {
+                std::cout << "No chains. Creating new chain..." << std::endl;
+                if (card->getName() == "Blue")
+                {
+                    Chain<Blue>* chain = new Chain<Blue>();
+                    current->addChain(chain);
+                } else if (card->getName() == "Chili") {
+                    Chain<Chili>* chain = new Chain<Chili>();
+                    current->addChain(chain);
+                } else if (card->getName() == "Stink") {
+                    Chain<Stink>* chain = new Chain<Stink>();
+                    current->addChain(chain);
+                } else if (card->getName() == "Green") {
+                    Chain<Green>* chain = new Chain<Green>();
+                    current->addChain(chain);
+                } else if (card->getName() == "Soy") {
+                    Chain<Soy>* chain = new Chain<Soy>();
+                    current->addChain(chain);
+                } else if (card->getName() == "Black") {
+                    Chain<Black>* chain = new Chain<Black>();
+                    current->addChain(chain);
+                } else if (card->getName() == "Red") {
+                    Chain<Red>* chain = new Chain<Red>();
+                    current->addChain(chain);
+                } else if (card->getName() == "Garden") {
+                    Chain<Garden>* chain = new Chain<Garden>();
+                    current->addChain(chain);
+                }
+
+                try
+                {   
+                    // Since first chain, default to -> index = 0
+                    // linter refuses to accet current[chainChoice]
+                        // so just wrote it explicitly
+                    current->operator[](chainChoice)+=card;
+                    correct = true;
+                } catch (std::invalid_argument const& e) {
+                    correct = false;
+                    std::cout << e.what() << std::endl;
+                    std::cout << "Try again." << std::endl;
+                }
+
+            } else {
+                std::cout << "Enter the chain number: ";
                 std::cin >> chainChoice;
-                
                 // checking user input
                 if (chainChoice < 1 || chainChoice > current->getNumChains())
                 {
@@ -155,65 +220,12 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                         std::cout << "Try again." << std::endl;
                     }
                 }
-            } while (!correct);
+            }
 
-        } else {
-            // from trade area
-            
-            char pick = 'y';
-            do {
-                ////// Getting card from trade area //////
-                std::cout << "Pick a card from the trade area." << std::endl;
-                
-                Card* card;
-                bool found = true;
-                std::string beanChoice;
-                do {
-                    std::cout << "\nEnter the bean name: " << std::endl;
-                    std::cin >> beanChoice;
-                    try {
-                        // getting card from trade area
-                        card = tradeArea.trade(beanChoice);
-                        found = true;
-                    } catch (std::invalid_argument e) {
-                        found = false;
-                        std::cout << e.what() << std::endl;
-                    }
-                } while (!found);
-                
-                ////// Getting chain to place card into //////
-                int chainChoice;
-                bool correct = true;
-                do {
-                    std::cout << "\nInto which chain to add card?" << std::endl;
-                    std::cout << "Enter the chain number: " << std::endl;
-                    std::cin >> chainChoice;
+            std::cout << "\nCard added to chain." << std::endl;
+            std::cout << current[chainChoice] << std::endl;
 
-                    if (chainChoice < 1 || chainChoice > current->getNumChains())
-                    {
-                        correct = false;
-                        std::cout << "No such chain. Try a number between 1 and " << current->getNumChains() << std::endl;
-                    } else {
-                        // try adding card to chain
-
-                        // subtract to make up for index
-                        chainChoice--;
-                        try {
-                            // adding card to chain
-                            // linter refuses to accet current[chainChoice] so just wrote it explicitly
-                            current->operator[](chainChoice)+=card;
-                            correct = true;
-                        } catch (std::invalid_argument const& e) {
-                            correct = false;
-                            std::cout << e.what() << std::endl;
-                            std::cout << "Try again." << std::endl;
-                        }
-                    }
-                } while (!correct);
-                
-                std::cout << "Would you like to pick another card? (y/n)" << std::endl;
-            } while (pick == 'y');
-        }
+        } while (!correct);
     }
 }
 

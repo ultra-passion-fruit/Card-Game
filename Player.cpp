@@ -90,7 +90,14 @@ Card* Player::disCard(int i) {
     return hand[i];
 }
 
-/*
+/**
+ * Adds the chain passed as argument.
+ */
+void Player::addChain(Chain_Base* chain) {
+    chains.push_back(chain);
+}
+
+/** 
 * Adds a new chain to the player.
 */
 void Player::buyThirdChain() {
