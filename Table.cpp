@@ -294,11 +294,15 @@ std::ostream& operator<<(std::ostream& os, Table& table) {
     os << table.tradeArea << std::endl;
 
     // On new line, display discard pile (first card)
-    os << table.discardPile.top() << std::endl;
+    if (!table.discardIsEmpty())
+    {
+        os << table.discardPile.top() << std::endl;
+    }    
     
     // add player 1 hand to output stream
     os << "Player 1 Hand: ";
     table.player1.printHand(os, false);
+    std::cout << "\n" << std::endl;
 
     // show player 1 chains
     os << "Player 1 Chains:" << std::endl;
@@ -307,6 +311,7 @@ std::ostream& operator<<(std::ostream& os, Table& table) {
         os << "(" << i+1 << ")";
         table.player1[i].print(os); os << "\n";
     }
+    std::cout << "\n\n" << std::endl;
     
     // add player 2 hand to output stream 
     os << "Player 2 Hand: ";
