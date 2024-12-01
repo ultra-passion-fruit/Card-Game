@@ -1,11 +1,14 @@
 #include "Table.h"
+#include <stdexcept>
 
 /*
-* is a constructor which accepts an istream and reconstruct the Table from file.
+* Table constructor which accepts an istream and reconstruct the Table from file.
+* @param istream& is
+* @param CardFactory* factory
 */
-// Table::Table(std::istream& is, const CardFactory* factory) {
+Table::Table(std::istream& is, const CardFactory* factory) {
 
-// }
+}
 
 /*
 * Table Constructor for normal game (no save file)
@@ -134,7 +137,7 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                             // so just wrote it explicitly
                         current->operator[](chainChoice)+=card;
                         correct = true;
-                    } catch (std::invalid_argument e) {
+                    } catch (std::invalid_argument const& e) {
                         correct = false;
                         std::cout << e.what() << std::endl;
                         std::cout << "Try again." << std::endl;
@@ -188,7 +191,7 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                             // linter refuses to accet current[chainChoice] so just wrote it explicitly
                             current->operator[](chainChoice)+=card;
                             correct = true;
-                        } catch (std::invalid_argument e) {
+                        } catch (std::invalid_argument const& e) {
                             correct = false;
                             std::cout << e.what() << std::endl;
                             std::cout << "Try again." << std::endl;

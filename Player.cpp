@@ -105,8 +105,9 @@ void Player::buyThirdChain() {
 /**
  * Sells a player's chain.
  */
-void sellChain() {
+void Player::sellChain() {
     // idk
+    int i = 4;
 }
 
 /*
@@ -143,6 +144,15 @@ Chain_Base& Player::operator[](int i) {
 */
 std::ostream& Player::printHand(std::ostream& os, bool all) {
     os << hand;
+    return os;
+}
+
+/**
+ * Insertion operator for Player object.
+ */
+std::ostream& operator<<(std::ostream& os, const Player& player) {
+    os << player.name;
+    os << player.numOfCoins;
     return os;
 }
 
