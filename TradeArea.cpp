@@ -75,7 +75,7 @@ std::ostream& operator<<(std::ostream& os, TradeArea& tradeArea) {
             os << card;
         }
     } else {
-        os << "Trade Area Empty!";
+        os << "Trade Area: Empty";
     }
     return os;
 }

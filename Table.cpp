@@ -96,6 +96,18 @@ bool Table::discardIsEmpty() {
     return discardPile.empty();
 }
 
+/**
+ * This deals the initial cards to the players.
+ */
+void Table::startGame() {
+    // draw 5 cards for each player
+    for (int i = 0; i < 5; i++)
+    {
+        player1.pickUp(deck.draw());
+        player2.pickUp(deck.draw());
+    }
+}
+
 /*
 * Will let player add cards to chains.
 * When allowDiscard=true, player can choose to discard all cards in Trade Area.
@@ -290,6 +302,8 @@ void Table::finishTurn() {
 }
 
 std::ostream& operator<<(std::ostream& os, Table& table) {
+    os << "\n===== Table =====\n\n";
+    
     // Display Trade Area
     os << table.tradeArea << std::endl;
 
@@ -325,5 +339,6 @@ std::ostream& operator<<(std::ostream& os, Table& table) {
         table.player2[i].print(os); os << "\n";
     }
 
+    os << "==================";
     return os;
 }

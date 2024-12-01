@@ -28,6 +28,9 @@ int main() {
     // winner variable for later
     std::string winner;
 
+    // deal 5 cards to each player
+    table.startGame();
+
     // OR
 
     // Load game from file
