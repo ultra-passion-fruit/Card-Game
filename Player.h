@@ -6,6 +6,7 @@
 #include "Card.h"
 #include "CardFactory.h"
 #include "Chain_Base.h"
+#include "Chain.h"
 #include "Hand.h"
 
 class Player {
@@ -14,6 +15,7 @@ class Player {
         std::string name;
         int numOfCoins;
         int maxNumChains;
+        bool occupied[3];
         std::vector<Chain_Base*> chains;
     public:
         Player() = default;
@@ -25,10 +27,11 @@ class Player {
         int getMaxNumChains();
         int getNumChains();
         int handSize();
+        bool positionOccupied(int);
         Card* play();
         void pickUp(Card*);
         Card* disCard(int);
-        void addChain(Chain_Base*);
+        void addChain(std::string, int);
         void buyThirdChain();
         void sellChain();
         Player& operator+=(int);

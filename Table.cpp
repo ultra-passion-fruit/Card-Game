@@ -1,5 +1,4 @@
 #include "Table.h"
-#include "Chain_Base.h"
 #include <stdexcept>
 
 /*
@@ -159,74 +158,39 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
         int chainChoice = 0; // 0 default if no chain
         bool correct = true;
         do {
-            if (current->getNumChains() == 0)
+            std::cout << "\n\tInto which chain to add card?" << std::endl;
+            std::cout << "\tEnter the chain number: ";
+            std::cin >> chainChoice;
+            // checking user input
+            if (chainChoice < 1 || chainChoice > current->getMaxNumChains())
             {
-                std::cout << "\n\tNo chains. Created new chain." << std::endl;
-                if (card->getName() == "Blue")
-                {
-                    Chain<Blue>* chain = new Chain<Blue>();
-                    current->addChain(chain);
-                } else if (card->getName() == "Chili") {
-                    Chain<Chili>* chain = new Chain<Chili>();
-                    current->addChain(chain);
-                } else if (card->getName() == "Stink") {
-                    Chain<Stink>* chain = new Chain<Stink>();
-                    current->addChain(chain);
-                } else if (card->getName() == "Green") {
-                    Chain<Green>* chain = new Chain<Green>();
-                    current->addChain(chain);
-                } else if (card->getName() == "soy") {
-                    Chain<Soy>* chain = new Chain<Soy>();
-                    current->addChain(chain);
-                } else if (card->getName() == "black") {
-                    Chain<Black>* chain = new Chain<Black>();
-                    current->addChain(chain);
-                } else if (card->getName() == "Red") {
-                    Chain<Red>* chain = new Chain<Red>();
-                    current->addChain(chain);
-                } else if (card->getName() == "garden") {
-                    Chain<Garden>* chain = new Chain<Garden>();
-                    current->addChain(chain);
-                }
+                correct = false;
+                std::cout << "\tNo such chain. Try a number between 1 and " << current->getMaxNumChains() << std::endl;
+            } else {
+                // subtract to make up for index
+                chainChoice--;
+                
+                // try getting chain
+                Chain_Base* chain;
+                try {
+                    // in case player selects a chain that is empty
+                    // must create it
+                    if (!current->positionOccupied(chainChoice))
+                    {   
+                        // creates chain with card type (still empty tho)
+                        current->addChain(card->getName(), chainChoice);
+                    }
 
-                try
-                {   
-                    // Since first chain, default to -> index = 0
-                    // linter refuses to accet current[chainChoice]
-                        // so just wrote it explicitly
-                    current->operator[](chainChoice)+=card;
+                    // getting chain
+                    chain = &(current->operator[](chainChoice));
+
+                    // add card to chain 
+                    chain->operator+=(card);
                     correct = true;
                     std::cout << "\n\tCard added to chain." << std::endl;
-                } catch (std::invalid_argument const& e) {
-                    correct = false;
-                    std::cout << e.what() << std::endl;
-                    std::cout << "\tTry again." << std::endl;
-                }
-
-            } else {
-                std::cout << "\n\tInto which chain to add card?" << std::endl;
-                std::cout << "\tEnter the chain number: ";
-                std::cin >> chainChoice;
-                // checking user input
-                if (chainChoice < 1 || chainChoice > current->getNumChains())
-                {
-                    correct = false;
-                    std::cout << "\tNo such chain. Try a number between 1 and " << current->getNumChains() << std::endl;
-                } else {
-                    // try adding card to chain
-
-                    // subtract to make up for index
-                    chainChoice--;
-                    try {
-                        // linter refuses to accet current[chainChoice]
-                            // so just wrote it explicitly
-                        current->operator[](chainChoice)+=card;
-                        correct = true;
-                    } catch (std::invalid_argument const& e) {
-                        correct = false;
-                        std::cout << "\n\tError: " << e.what() << std::endl;
-                        std::cout << "\tTry again." << std::endl;
-                    }
+                } catch (std::exception const&e) {
+                    std::cout << "\n\tError: There was an error." << std::endl;
+                    std::cout << "\nTry again." << std::endl;
                 }
             }
         } while (!correct);
@@ -265,7 +229,8 @@ void Table::playerDiscards() {
             position--;
             correct = true;
             try {
-                discardPile += current->disCard(position);
+                card = current->disCard(position);
+                discardPile += card;
             } catch (std::out_of_range e) {
                 std::cout << e.what();
                 std::cout << "\tTry again.";
@@ -329,43 +294,42 @@ std::ostream& operator<<(std::ostream& os, Table& table) {
     }
 
     // show player 1 chains
-    os << "\nPlayer 1 Chains: ";
-    if (table.player1.getNumChains() != 0)
+    os << "\nPlayer 1 Chains: \n";
+    for (int i = 0; i < table.player1.getMaxNumChains(); i++)
     {   
-        std::cout << std::endl;
-        for (int i = 0; i < table.player1.getNumChains(); i++)
-            {   
-                os << "(" << i+1 << ") ";
-                table.player1[i].print(os); os << std::endl;
-            }
-    } else {
-        os << "No Chains." << std::endl;
+        os << "(" << i+1 << ") ";
+        if (table.player1.positionOccupied(i))
+        {
+            table.player1[i].print(os); os << "\n";
+        } else {
+            os << "Empty\n";
+        }
     }
 
     // show player 1 chains
-    os << "\nPlayer 2 Chains: ";
-    if (table.player2.getNumChains() != 0)
+    os << "\nPlayer 2 Chains: \n";
+    for (int i = 0; i < table.player2.getMaxNumChains(); i++)
     {   
-        std::cout << std::endl;
-        for (int i = 0; i < table.player2.getNumChains(); i++)
-            {   
-                os << "(" << i+1 << ")";
-                table.player2[i].print(os); os << "\n";
-            }
-    } else {
-        os << "No Chains.\n";
+        os << "(" << i+1 << ") ";
+        if (table.player2.positionOccupied(i))
+        {
+            table.player2[i].print(os); os << "\n";
+        } else {
+            os << "Empty\n";
+        }
     }
 
-    // add player 1 hand to output stream
-    os << "\n\nPlayer 1 Hand: ";
-    table.player1.printHand(os, false);
-
-    // add player 2 hand to output stream
-    os << "\n\nPlayer 2 Hand: ";
-    table.player2.printHand(os, false);
+    if (table.current->getName() == table.player1.getName())
+    {
+        // add player 1 hand to output stream
+        os << "\n\nPlayer 1 Hand: ";
+        table.player1.printHand(os, true);
+    } else if (table.current->getName() == table.player2.getName()) {
+        // add player 2 hand to output stream
+        os << "\n\nPlayer 2 Hand: ";
+        table.player2.printHand(os, true);
+    }
     std::cout << "\n" << std::endl;
-
-    
 
     os << "====================================================================";
     return os;

@@ -9,7 +9,11 @@ Player::Player(std::string& inputName) :
     name(inputName),
     numOfCoins(0),
     maxNumChains(2),
-    chains(0) {}
+    chains(0) {
+        occupied[0] = false;
+        occupied[1] = false;
+        occupied[2] = false;
+    }
 
 /*
 * Constructor for create from file save.
@@ -68,6 +72,13 @@ int Player::handSize() {
     return hand.size();
 }
 
+/**
+ * Returns true if there is a chain created at specified position.
+ */
+bool Player::positionOccupied(int i) {
+    return occupied[i];
+}
+
 /*
 * Gets the top card from the hand. Just a silly wrapper function
 * because someone decided to make the class structure like this.
@@ -93,8 +104,32 @@ Card* Player::disCard(int i) {
 /**
  * Adds the chain passed as argument.
  */
-void Player::addChain(Chain_Base* chain) {
-    chains.push_back(chain);
+void Player::addChain(std::string cardName, int chainPosition) {
+    Chain_Base* chain;
+    if (cardName == "Blue")
+    {
+        chain = new Chain<Blue>();
+    } else if (cardName == "Chili") {
+        chain = new Chain<Chili>();
+    } else if (cardName == "Stink") {
+        chain = new Chain<Stink>();
+    } else if (cardName == "Green") {
+        chain = new Chain<Green>();
+    } else if (cardName == "soy") {
+        chain = new Chain<Soy>();
+    } else if (cardName == "black") {
+        chain = new Chain<Black>();
+    } else if (cardName == "Red") {
+        chain = new Chain<Red>();
+    } else if (cardName == "garden") {
+        chain = new Chain<Garden>();
+    }
+    if (chains.size() < chainPosition+1)
+    {
+        chains.resize(chainPosition+1);
+    }
+    chains[chainPosition] = chain;
+    occupied[chainPosition] = true;
 }
 
 /** 
@@ -150,7 +185,12 @@ Chain_Base& Player::operator[](int i) {
 *@return ostream reference
 */
 std::ostream& Player::printHand(std::ostream& os, bool all) {
-    os << hand;
+    if (all)
+    {
+        os << hand;
+    } else {
+        os << hand.front();
+    }
     return os;
 }
 
