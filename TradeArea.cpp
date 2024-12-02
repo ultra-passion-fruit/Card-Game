@@ -29,7 +29,8 @@ bool TradeArea::legal(Card* card) {
     std::list<Card*>::iterator it;
     bool matched = false;
     for(it = this->begin(); it != this->end(); it++) {
-        matched = matched || ((*it)->getName() == card->getName());
+        bool check = ((*it)->getName() == card->getName());
+        matched = matched || check;
     }
     return matched;
 }
@@ -72,7 +73,7 @@ std::ostream& operator<<(std::ostream& os, TradeArea& tradeArea) {
     if (!tradeArea.empty())
     {
         for(Card* card : tradeArea) {
-            os << card;
+            os << *card;
         }
     }
     return os;

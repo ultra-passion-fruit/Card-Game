@@ -135,7 +135,7 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
             bool found = true;
             std::string beanChoice;
             do {
-                std::cout << "\nEnter the bean name: " << std::endl;
+                std::cout << "\nEnter the bean name: ";
                 std::cin >> beanChoice;
                 try {
                     // getting card from trade area
@@ -217,7 +217,7 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                         correct = true;
                     } catch (std::invalid_argument const& e) {
                         correct = false;
-                        std::cout << e.what() << std::endl;
+                        std::cout << "\n\tError: " << e.what() << std::endl;
                         std::cout << "\tTry again." << std::endl;
                     }
                 }
@@ -265,6 +265,8 @@ void Table::playerDiscards() {
             }
         }
     } while (!correct);
+
+    std::cout<< "\n\tCard discarded." << std::endl;
 }
 
 /*
@@ -277,28 +279,16 @@ void Table::lastDraw() {
         tradeArea += deck.draw();
     }
     
-    // grabbing firs card from discard pile
-    Card* card;
-    if (!discardIsEmpty())
-    {
-        card = discardPile.pickUp();
-    } else {
-        std::cout << "\tDiscard pile is empty." << std::endl;
-    }
-
     // adding cards from discard pile into trade area until illegal or no more cards
-    while (tradeArea.legal(card))
-    {
-        tradeArea+= card;
-
+    Card* card;
+    do {        
+        // requires if for first card picked, to check if not empty
         if (!discardIsEmpty())
         {
             card = discardPile.pickUp();
-        } else {
-            std::cout << "\tDiscard pile is empty." << std::endl;
+            tradeArea+= card;
         }
-    }
-    std::cout << "\tNo more matching beans in trade area." << std::endl;
+    } while (tradeArea.legal(card) && !discardIsEmpty());
 }
 
 /*
@@ -326,7 +316,7 @@ std::ostream& operator<<(std::ostream& os, Table& table) {
     os << "Discard Pile: ";
     if (!table.discardPile.empty())
     {
-        os << table.discardPile.top() << std::endl;
+        os << *(table.discardPile.top()) << std::endl;
     } else {
         os << "Empty" << std::endl;
     }

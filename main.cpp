@@ -144,10 +144,10 @@ int main() {
             table.playerDiscards();
         }
 
-        std::cout << table << std::endl;
-
         // enter message
         enter();
+
+        std::cout << table << std::endl;
         
         //////////   (4)   New cards added to table   //////////
 
@@ -158,10 +158,10 @@ int main() {
         // DRAW from discard pile as long as same bean trade area
         table.lastDraw();
 
-        std::cout << table << std::endl;
-
         // displays ENTER message
         enter();
+
+        std::cout << table << std::endl;
 
         //////////   (5)   Pick from trade area to add to chain  //////////    
 
