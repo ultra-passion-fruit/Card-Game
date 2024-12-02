@@ -152,10 +152,9 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
         int chainChoice = 0; // 0 default if no chain
         bool correct = true;
         do {
-            std::cout << "\nInto which chain to add card?" << std::endl;
             if (current->getNumChains() == 0)
             {
-                std::cout << "No chains. Creating new chain..." << std::endl;
+                std::cout << "\n\tNo chains. Created new chain." << std::endl;
                 if (card->getName() == "Blue")
                 {
                     Chain<Blue>* chain = new Chain<Blue>();
@@ -190,6 +189,7 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                         // so just wrote it explicitly
                     current->operator[](chainChoice)+=card;
                     correct = true;
+                    std::cout << "\n\tCard added to chain." << std::endl;
                 } catch (std::invalid_argument const& e) {
                     correct = false;
                     std::cout << e.what() << std::endl;
@@ -197,6 +197,7 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                 }
 
             } else {
+                std::cout << "\nInto which chain to add card?" << std::endl;
                 std::cout << "Enter the chain number: ";
                 std::cin >> chainChoice;
                 // checking user input
@@ -221,10 +222,6 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                     }
                 }
             }
-
-            std::cout << "\nCard added to chain." << std::endl;
-            std::cout << current[chainChoice] << std::endl;
-
         } while (!correct);
     }
 }
@@ -314,17 +311,24 @@ void Table::finishTurn() {
 }
 
 std::ostream& operator<<(std::ostream& os, Table& table) {
-    os << "\n===== Table =====\n\n";
+    os << "\n============================== Table ===============================\n\n";
     
     // Display Trade Area
-    os << table.tradeArea << std::endl;
+    os << "Trade Area: ";
+    if (!table.tradeArea.empty())
+    {   
+        os << table.tradeArea << std::endl;
+    } else {
+        os << "Empty" << std::endl; 
+    }
 
     // On new line, display discard pile (first card)
+    os << "Discard Pile: ";
     if (!table.discardPile.empty())
     {
         os << table.discardPile.top() << std::endl;
     } else {
-        os << "Discard Pile: Empty\n";
+        os << "Empty" << std::endl;
     }
 
     // show player 1 chains
@@ -334,15 +338,15 @@ std::ostream& operator<<(std::ostream& os, Table& table) {
         std::cout << std::endl;
         for (int i = 0; i < table.player1.getNumChains(); i++)
             {   
-                os << "(" << i+1 << ")";
-                table.player1[i].print(os); os << "\n";
+                os << "(" << i+1 << ") ";
+                table.player1[i].print(os); os << std::endl;
             }
     } else {
-        os << "No Chains.";
+        os << "No Chains." << std::endl;
     }
 
     // show player 1 chains
-    os << "\n\nPlayer 2 Chains: ";
+    os << "\nPlayer 2 Chains: ";
     if (table.player2.getNumChains() != 0)
     {   
         std::cout << std::endl;
@@ -352,21 +356,20 @@ std::ostream& operator<<(std::ostream& os, Table& table) {
                 table.player2[i].print(os); os << "\n";
             }
     } else {
-        os << "No Chains.";
+        os << "No Chains.\n";
     }
 
     // add player 1 hand to output stream
     os << "\n\nPlayer 1 Hand: ";
     table.player1.printHand(os, false);
-    std::cout << "\n" << std::endl;
 
     // add player 2 hand to output stream
-    os << "Player 2 Hand: ";
+    os << "\n\nPlayer 2 Hand: ";
     table.player2.printHand(os, false);
     std::cout << "\n" << std::endl;
 
     
 
-    os << "==================";
+    os << "====================================================================";
     return os;
 }

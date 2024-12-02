@@ -74,8 +74,6 @@ std::ostream& operator<<(std::ostream& os, TradeArea& tradeArea) {
         for(Card* card : tradeArea) {
             os << card;
         }
-    } else {
-        os << "Trade Area: Empty";
     }
     return os;
 }

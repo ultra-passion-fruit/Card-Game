@@ -1,6 +1,11 @@
 #include <iostream>
 #include "Player.h"
 #include "Table.h"
+#include <stdlib.h>
+#include <unistd.h>
+
+// main formatting helper function
+void enter();
 
 int main() {
     // creating factory
@@ -37,7 +42,10 @@ int main() {
     // deal 5 cards to each player
     table.startGame();
 
-    std::cout << "\nEach player is dealt 5 cards." << std::endl;
+    std::cout << "\nFirst, each player is dealt 5 cards." << std::endl;
+
+    // displays ENTER message
+    enter();
 
     // OR
 
@@ -50,7 +58,7 @@ int main() {
             // TODO (maybe)
         
         // else
-        
+
         // display table
             // shows deck, trade area and player hands
         std:: cout << table << std::endl;
@@ -59,8 +67,13 @@ int main() {
         std::cout << std::endl;
         std::cout << table.getCurrent()->getName() << ", it is your turn." << std::endl;
 
+        // displays ENTER message
+        enter();
+
         //////////   (1)   Pick from trade area to add to chain   //////////
         
+        std::cout << "[1] Pick from or clear trade area." << std::endl;
+
         // if trade area not empty
         if(!table.discardIsEmpty())
         {
@@ -70,8 +83,8 @@ int main() {
             // can choose to discard all cards too
             int pick = true;
             std::cout << "OPTION:" << std::endl;
-            std::cout << "(1) Pick a card from trade area to add to chain." << std::endl;
-            std::cout << "(2) Discard all cards in the trade area." << std::endl;
+            std::cout << "\t(1) Pick a card from trade area to add to chain." << std::endl;
+            std::cout << "\t(2) Discard all cards in the trade area." << std::endl;
             do {
                 std::cout << "Choice: " << std::endl;
                 std::cin >> pick;
@@ -86,12 +99,16 @@ int main() {
                 std::cout << "Would you like to add another card? (y/n) ";
                 std::cin >> another;
             } while (another == 'y');
+        } else {
+            std::cout << "\n\tTrade area is empty. Skipping...\n" << std::endl;
+            // displays ENTER message
+            enter();
         }
         
         //////////   (2)   Place top card from hand in a chain   //////////
         
         char repeat = 'n';
-        std::cout << "\nChoose a chain to place your topmost card." << std::endl;
+        std::cout << "\n[2] Choose a chain to place your topmost card in." << std::endl;
         // REPEAT as long as player wants
         do
         {
@@ -104,14 +121,21 @@ int main() {
             // will list to player the chain options to sell
             table.playerSellChain();
             
-            std::cout << "Would you like to play another card? (y/n) ";
+            // displays ENTER message
+            enter();
+
+            // displaying table to player after adding card
+            std::cout << table << std::endl;
+            
+            std::cout << "\nWould you like to play another card? (y/n) ";
             std::cin >> repeat;
         } while (repeat == 'y');
 
         //////////   (3)   Discard a card from hand (OPT)   //////////
         
+        std::cout << "\n[3] Discard a card from your hand. (Optional)" << std::endl;
         char discard = 'n';        
-        std::cout << "Would you like to discard a card from your hand? (y/n) ";
+        std::cout << "\nWould you like to discard a card from your hand? (y/n) ";
         std::cin >> discard;
         // OPTION: Discard a card
         if (discard == 'y')
@@ -119,6 +143,9 @@ int main() {
             // shows cards to discard and player chooses
             table.playerDiscards();
         }
+
+        // enter message
+        enter();
         
         //////////   (4)   New cards added to table   //////////
 
@@ -126,6 +153,9 @@ int main() {
         // DRAW from discard pile as long as same bean trade area
         std::cout << "Drawing 3 cards from deck..." << std::endl;
         table.lastDraw();
+
+        // enter message
+        enter();
 
         //////////   (5)   Pick from trade area to add to chain  //////////    
 
@@ -153,4 +183,9 @@ int main() {
         table.changeCurrent();
     }
     return 0;
+}
+
+void enter() {
+    std::cout << "\n\tPress (ENTER) or any key to continue." << std::endl;
+    std::cin.get();
 }
