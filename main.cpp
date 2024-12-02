@@ -72,7 +72,7 @@ int main() {
 
         //////////   (1)   Pick from trade area to add to chain   //////////
         
-        std::cout << "[1] Pick from or clear trade area." << std::endl;
+        std::cout << "[1] Pick from trade area to add to chain, or choose to clear trade area." << std::endl;
 
         // if trade area not empty
         if(!table.discardIsEmpty())
@@ -100,7 +100,7 @@ int main() {
                 std::cin >> another;
             } while (another == 'y');
         } else {
-            std::cout << "\n\tTrade area is empty. Skipping...\n" << std::endl;
+            std::cout << "\n\tTrade area is empty. Skipping..." << std::endl;
             // displays ENTER message
             enter();
         }
@@ -127,7 +127,7 @@ int main() {
             // displaying table to player after adding card
             std::cout << table << std::endl;
             
-            std::cout << "\nWould you like to play another card? (y/n) ";
+            std::cout << "\n\tWould you like to play another card? (y/n) ";
             std::cin >> repeat;
         } while (repeat == 'y');
 
@@ -135,7 +135,7 @@ int main() {
         
         std::cout << "\n[3] Discard a card from your hand. (Optional)" << std::endl;
         char discard = 'n';        
-        std::cout << "\nWould you like to discard a card from your hand? (y/n) ";
+        std::cout << "\n\tWould you like to discard a card from your hand? (y/n) ";
         std::cin >> discard;
         // OPTION: Discard a card
         if (discard == 'y')
@@ -144,24 +144,32 @@ int main() {
             table.playerDiscards();
         }
 
+        std::cout << table << std::endl;
+
         // enter message
         enter();
         
         //////////   (4)   New cards added to table   //////////
 
+        std::cout << "\n[4] Drawing more cards in trade area." << std::endl;
+        std::cout << "\n\tDrawing 3 cards from deck and placing in trade area." << std::endl;
+        std::cout << "\tDrawing from discard pile as long as matching bean in trade area." << std::endl;
         // DRAW 3 cards from deck and place in trade area
         // DRAW from discard pile as long as same bean trade area
-        std::cout << "Drawing 3 cards from deck..." << std::endl;
         table.lastDraw();
 
-        // enter message
+        std::cout << table << std::endl;
+
+        // displays ENTER message
         enter();
 
         //////////   (5)   Pick from trade area to add to chain  //////////    
 
+        std::cout << "\n[5] Pick from trade area to add to chain. (Optional)" << std::endl;
+
         // ADD from trade area to chain (OPT)
         char add = 'n';
-        std::cout << "Would you like to add cards from the Trade Area to a chain? (y/n) " << std::endl;
+        std::cout << "\n\tWould you like to add cards from the trade area to a chain? (y/n) ";
         std::cin >> add;
         if (add == 'y')
         {
@@ -169,15 +177,25 @@ int main() {
             do {
                 // SELECT card to add
             table.addToChains(false, false);
-            std::cout << "Would you like to add another card? (y/n) ";
+            std::cout << "\tWould you like to add another card? (y/n) ";
             std::cin >> another;
             } while (another == 'y');
         }
 
         //////////   (6)   Get cards from deck into hand   //////////
 
+        std::cout << "\n[6] Draw 2 cards from deck into player's hand." << std::endl;
+
+        // displays ENTER message
+        enter();
+
         // DRAW 2 cards from deck to current player
         table.finishTurn();
+
+        std::cout << table << std::endl;
+
+        // displays ENTER message
+        enter();
 
         // CHANGE player
         table.changeCurrent();

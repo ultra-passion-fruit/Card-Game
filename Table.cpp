@@ -168,16 +168,16 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                 } else if (card->getName() == "Green") {
                     Chain<Green>* chain = new Chain<Green>();
                     current->addChain(chain);
-                } else if (card->getName() == "Soy") {
+                } else if (card->getName() == "soy") {
                     Chain<Soy>* chain = new Chain<Soy>();
                     current->addChain(chain);
-                } else if (card->getName() == "Black") {
+                } else if (card->getName() == "black") {
                     Chain<Black>* chain = new Chain<Black>();
                     current->addChain(chain);
                 } else if (card->getName() == "Red") {
                     Chain<Red>* chain = new Chain<Red>();
                     current->addChain(chain);
-                } else if (card->getName() == "Garden") {
+                } else if (card->getName() == "garden") {
                     Chain<Garden>* chain = new Chain<Garden>();
                     current->addChain(chain);
                 }
@@ -193,18 +193,18 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                 } catch (std::invalid_argument const& e) {
                     correct = false;
                     std::cout << e.what() << std::endl;
-                    std::cout << "Try again." << std::endl;
+                    std::cout << "\tTry again." << std::endl;
                 }
 
             } else {
-                std::cout << "\nInto which chain to add card?" << std::endl;
-                std::cout << "Enter the chain number: ";
+                std::cout << "\n\tInto which chain to add card?" << std::endl;
+                std::cout << "\tEnter the chain number: ";
                 std::cin >> chainChoice;
                 // checking user input
                 if (chainChoice < 1 || chainChoice > current->getNumChains())
                 {
                     correct = false;
-                    std::cout << "No such chain. Try a number between 1 and " << current->getNumChains() << std::endl;
+                    std::cout << "\tNo such chain. Try a number between 1 and " << current->getNumChains() << std::endl;
                 } else {
                     // try adding card to chain
 
@@ -218,7 +218,7 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                     } catch (std::invalid_argument const& e) {
                         correct = false;
                         std::cout << e.what() << std::endl;
-                        std::cout << "Try again." << std::endl;
+                        std::cout << "\tTry again." << std::endl;
                     }
                 }
             }
@@ -238,21 +238,21 @@ void Table::playerSellChain() {
 */
 void Table::playerDiscards() {
     ////// Getting card from hand //////
-    std::cout << "Pick a card from your hand." << std::endl;
-    current->printHand(std::cout, true);
+    std::cout << "\n\tPick a card from your hand. Take a look at the table above to see your hand." << std::endl;
+    // current->printHand(std::cout, true);
     
-    std::cout << "\nFirst card is 1, second is 2, etc." << std::endl;
+    std::cout << "\tFirst card is 1, second is 2, etc." << std::endl;
 
     Card* card;
     bool correct = true;
     int position;
     do {
-        std::cout << "Enter the position: ";
+        std::cout << "\tEnter the position: ";
         std::cin >> position;
         if (position < 1 || position > current->handSize())
         {
             correct = false;
-            std::cout << "No such position. Try a number between 1 and " << current->handSize() << std::endl;
+            std::cout << "\n\tNo such position. Try a number between 1 and " << current->handSize() << "." << std::endl;
         } else {
             // getting card from hand and moving to discard pile
             position--;
@@ -261,7 +261,7 @@ void Table::playerDiscards() {
                 discardPile += current->disCard(position);
             } catch (std::out_of_range e) {
                 std::cout << e.what();
-                std::cout << "Try again.";
+                std::cout << "\tTry again.";
             }
         }
     } while (!correct);
@@ -283,7 +283,7 @@ void Table::lastDraw() {
     {
         card = discardPile.pickUp();
     } else {
-        std::cout << "Discard pile is empty." << std::endl;
+        std::cout << "\tDiscard pile is empty." << std::endl;
     }
 
     // adding cards from discard pile into trade area until illegal or no more cards
@@ -295,10 +295,10 @@ void Table::lastDraw() {
         {
             card = discardPile.pickUp();
         } else {
-            std::cout << "Discard pile is empty." << std::endl;
+            std::cout << "\tDiscard pile is empty." << std::endl;
         }
     }
-    std::cout << "No more matching beans in trade area." << std::endl;
+    std::cout << "\tNo more matching beans in trade area." << std::endl;
 }
 
 /*
