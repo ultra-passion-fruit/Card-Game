@@ -24,6 +24,7 @@ class Table {
         bool changeCurrent();
         Player* getCurrent();
         bool discardIsEmpty();
+        bool tradeAreaIsEmpty();
         void startGame();
         void addToChains(bool, bool);
         void playerSellChain();

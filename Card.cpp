@@ -16,7 +16,7 @@ int Blue::getCardsPerCoin(int coins) {
     }
 }
 std::string Blue::getName() const {
-    return "Blue";
+    return cardName;
 }
 void Blue::print(std::ostream &os) {
     os << "B ";
@@ -31,7 +31,7 @@ int Chili::getCardsPerCoin(int coins) {
     }
 }
 std::string Chili::getName() const {
-    return "Chili";
+    return cardName;
 }
 void Chili::print(std::ostream &os) {
     os << "C ";
@@ -46,7 +46,7 @@ int Stink::getCardsPerCoin(int coins) {
     }
 }
 std::string Stink::getName() const {
-    return "Stink";
+    return cardName;
 }
 void Stink::print(std::ostream &os) {
     os << "S ";
@@ -61,7 +61,7 @@ int Green::getCardsPerCoin(int coins) {
     }
 }
 std::string Green::getName() const {
-    return "Green";
+    return cardName;
 }
 void Green::print(std::ostream &os) {
     os << "G ";
@@ -76,7 +76,7 @@ int Soy::getCardsPerCoin(int coins) {
     }
 }
 std::string Soy::getName() const {
-    return "soy";
+    return cardName;
 }
 void Soy::print(std::ostream &os) {
     os << "s ";
@@ -91,7 +91,7 @@ int Black::getCardsPerCoin(int coins) {
     }
 }
 std::string Black::getName() const {
-    return "black";
+    return cardName;
 }
 void Black::print(std::ostream &os) {
     os << "b ";
@@ -106,7 +106,7 @@ int Red::getCardsPerCoin(int coins) {
     }
 }
 std::string Red::getName() const {
-    return "Red";
+    return cardName;
 }
 void Red::print(std::ostream &os) {
     os << "R ";
@@ -121,7 +121,7 @@ int Garden::getCardsPerCoin(int coins) {
     }
 }
 std::string Garden::getName() const {
-    return "garden";
+    return cardName;
 }
 void Garden::print(std::ostream &os) {
     os << "g ";

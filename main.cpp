@@ -75,18 +75,18 @@ int main() {
         std::cout << "[1] Pick from trade area to add to chain, or choose to clear trade area." << std::endl;
 
         // if trade area not empty
-        if(!table.discardIsEmpty())
+        if(!table.tradeAreaIsEmpty())
         {
             // OPTION: Add cards to chain
             // will show Trade Area
             // allow player to choose card to add to chain
             // can choose to discard all cards too
             int pick = true;
-            std::cout << "OPTION:" << std::endl;
+            std::cout << "\n\tOPTION:" << std::endl;
             std::cout << "\t(1) Pick a card from trade area to add to chain." << std::endl;
             std::cout << "\t(2) Discard all cards in the trade area." << std::endl;
             do {
-                std::cout << "Choice: " << std::endl;
+                std::cout << "\n\tChoice: ";
                 std::cin >> pick;
             } while (pick > 2 || pick < 1);
             pick--;
@@ -96,7 +96,13 @@ int main() {
                 // if pick=true, don't discard, pick. Otherwise, discard
                 // 2nd arg = false, add from trade area, not hand
                 table.addToChains(pick, false);
-                std::cout << "Would you like to add another card? (y/n) ";
+
+                // displays ENTER message
+                enter();
+
+                std::cout << table << std::endl;
+
+                std::cout << "\n\tWould you like to add another card? (y/n) ";
                 std::cin >> another;
             } while (another == 'y');
         } else {
@@ -177,7 +183,11 @@ int main() {
             do {
                 // SELECT card to add
             table.addToChains(false, false);
-            std::cout << "\tWould you like to add another card? (y/n) ";
+
+            // displays ENTER message
+            enter();
+
+            std::cout << "\n\tWould you like to add another card? (y/n) ";
             std::cin >> another;
             } while (another == 'y');
         }

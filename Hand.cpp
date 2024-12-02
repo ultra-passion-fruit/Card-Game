@@ -58,7 +58,7 @@ Card* Hand::operator[](int i) {
     if (i < this->size() && i > -1)
     {
         std::advance(it, i);
-        return *this->c.erase(it);
+        return *(this->c.erase(it)); 
     } else {
         throw std::out_of_range("Index out of range");
     }

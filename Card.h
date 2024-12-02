@@ -16,6 +16,7 @@
 class Card {
     protected:
         int valTable[4];
+        std::string cardName;
     public:
         Card() = default;
         // Card(const std::array<int, 4>& chainVal){
@@ -52,6 +53,7 @@ class Blue: public Card {
     friend class CardFactory;
     // std::vector<int> valTable;
     Blue(){
+        cardName = "Blue";
         valTable[0] = 3;
         valTable[1] = 6;
         valTable[2] = 8;
@@ -67,6 +69,7 @@ class Chili: public Card {
     friend class CardFactory;
     // std::vector<int> valTable;
     Chili(){
+        cardName = "Chili";
         valTable[0] = 3;
         valTable[1] = 6;
         valTable[2] = 8;
@@ -82,6 +85,7 @@ class Stink: public Card {
     friend class CardFactory;
     // std::vector<int> valTable;
     Stink(){
+        cardName = "Stink";
         valTable[0] = 3;
         valTable[1] = 6;
         valTable[2] = 8;
@@ -97,6 +101,7 @@ class Green: public Card {
     friend class CardFactory;
     // std::vector<int> valTable;
     Green(){
+        cardName = "Green";
         valTable[0] = 3;
         valTable[1] = 6;
         valTable[2] = 8;
@@ -112,6 +117,7 @@ class Soy: public Card {
     friend class CardFactory;
     // std::vector<int> valTable;
     Soy(){
+        cardName = "soy";
         valTable[0] = 2;
         valTable[1] = 4;
         valTable[2] = 5;
@@ -127,6 +133,7 @@ class Black: public Card {
     friend class CardFactory;
     // std::vector<int> valTable;
     Black(){
+        cardName = "black";
         valTable[0] = 2;
         valTable[1] = 4;
         valTable[2] = 5;
@@ -142,6 +149,7 @@ class Red: public Card {
     friend class CardFactory;
     // std::vector<int> valTable;
     Red() {
+        cardName = "Red";
         valTable[0] = 2;
         valTable[1] = 3;
         valTable[2] = 4;
@@ -157,6 +165,7 @@ class Garden: public Card {
     friend class CardFactory;
     // std::vector<int> valTable;
     Garden(){
+        cardName = "garden";
         valTable[0] = -1;
         valTable[1] = 2;
         valTable[2] = 3;

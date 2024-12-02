@@ -98,6 +98,13 @@ bool Table::discardIsEmpty() {
 }
 
 /**
+ * Returns true if trade area is empty.
+ */
+bool Table::tradeAreaIsEmpty() {
+    return tradeArea.empty();
+}
+
+/**
  * This deals the initial cards to the players.
  */
 void Table::startGame() {
@@ -130,12 +137,12 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
             card = current->play();
         } else {
             //////            Getting card from trade area             //////
-            std::cout << "Pick a card from the trade area." << std::endl;
+            std::cout << "\tPick a card from the trade area." << std::endl;
             
             bool found = true;
             std::string beanChoice;
             do {
-                std::cout << "\nEnter the bean name: ";
+                std::cout << "\n\tEnter the bean name: ";
                 std::cin >> beanChoice;
                 try {
                     // getting card from trade area
