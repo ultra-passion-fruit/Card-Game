@@ -89,9 +89,24 @@ int main() {
                 std::cout << "\n\tChoice: ";
                 std::cin >> pick;
             } while (pick > 2 || pick < 1);
-            pick--;
+            // assigning bool value to pick based on player choice
+            pick = pick == 1;
             char another = 'n';
             do {
+
+                if (table.mustSell())
+                {
+                    std::cout << "\n\tYou have no matching chains for your next card. You must sell a chain." << std::endl;
+
+                    // prompts player to sell a chain
+                    table.playerSellChain();
+
+                    // displays ENTER message
+                    enter();
+
+                    std::cout << table << std::endl;
+                }
+                
                 // SELECT card to add
                 // if pick=true, don't discard, pick. Otherwise, discard
                 // 2nd arg = false, add from trade area, not hand
@@ -102,8 +117,13 @@ int main() {
 
                 std::cout << table << std::endl;
 
-                std::cout << "\n\tWould you like to add another card? (y/n) ";
-                std::cin >> another;
+                if (pick)
+                {
+                    std::cout << "\n\tWould you like to add another card? (y/n) ";
+                    std::cin >> another;
+                } else {
+                    another = 'n';
+                }
             } while (another == 'y');
         } else {
             std::cout << "\n\tTrade area is empty. Skipping..." << std::endl;
@@ -118,14 +138,21 @@ int main() {
         // REPEAT as long as player wants
         do
         {
+            if (table.mustSell())
+            {
+                std::cout << "\n\tYou have no matching chains for your next card. You must sell a chain." << std::endl;
+
+                // prompts player to sell a chain
+                table.playerSellChain();
+
+                // displays ENTER message
+                enter();
+
+                std::cout << table << std::endl;
+            }
+            
             // PLAYER play topmost card from hand
             table.addToChains(false, true);
-
-            // TODO: Something that will check if the player 
-                // absolutely must sell chains, not sure how to do yet.
-            // receive coins (if any)
-            // will list to player the chain options to sell
-            table.playerSellChain();
             
             // displays ENTER message
             enter();
@@ -181,14 +208,29 @@ int main() {
         {
             char another = 'n';
             do {
+                if (table.mustSell())
+                {
+                    std::cout << "\n\tYou have no matching chains for your next card. You must sell a chain." << std::endl;
+
+                    // prompts player to sell a chain
+                    table.playerSellChain();
+
+                    // displays ENTER message
+                    enter();
+
+                    std::cout << table << std::endl;
+                }
+                
                 // SELECT card to add
-            table.addToChains(false, false);
+                table.addToChains(false, false);
 
-            // displays ENTER message
-            enter();
+                // displays ENTER message
+                enter();
 
-            std::cout << "\n\tWould you like to add another card? (y/n) ";
-            std::cin >> another;
+                std::cout << table << std::endl;
+
+                std::cout << "\n\tWould you like to add another card? (y/n) ";
+                std::cin >> another;
             } while (another == 'y');
         }
 

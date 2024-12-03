@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include <stdexcept>
+#include <iostream>
 
 /*
 * Constructor with name.
@@ -70,6 +71,26 @@ int Player::getNumChains() {
 */
 int Player::handSize() {
     return hand.size();
+}
+
+/**
+ * Returns true if top card in hand matches any chain player has.
+ * False, otherwise.
+ * @return bool
+ */
+bool Player::matchSomeChain() {
+    Card* card = hand.top();
+    bool matched;
+    for (int i = 0; i < getNumChains(); i++)
+    {
+        if (occupied[i])
+        {
+            std::ostringstream ss;
+            chains[i]->print(ss);
+            matched = matched || (ss.str().at(0) == card->getName().at(0));
+        }
+    }
+    return matched;
 }
 
 /**

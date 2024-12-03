@@ -27,6 +27,7 @@ class Table {
         bool tradeAreaIsEmpty();
         void startGame();
         void addToChains(bool, bool);
+        bool mustSell();
         void playerSellChain();
         void playerDiscards();
         void lastDraw();

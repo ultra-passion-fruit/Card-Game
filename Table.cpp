@@ -125,7 +125,7 @@ void Table::startGame() {
 void Table::addToChains(bool allowDiscard, bool fromHand) {
     if (allowDiscard)
     {
-        std::cout << "Discarding all cards in the trade area..." << std::endl;
+        std::cout << "\n\tDiscarding all cards in the trade area..." << std::endl;
         tradeArea.clear();
     } else {
         // card to add
@@ -189,19 +189,70 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                     correct = true;
                     std::cout << "\n\tCard added to chain." << std::endl;
                 } catch (std::exception const&e) {
+                    correct = false;
                     std::cout << "\n\tError: There was an error." << std::endl;
-                    std::cout << "\nTry again." << std::endl;
+                    std::cout << "\n\tTry again." << std::endl;
                 }
             }
         } while (!correct);
     }
 }
 
+/**
+ * Returns true if player must sell chain.
+ */
+bool Table::mustSell() {
+    // returns false if no chains, dont need to sell, cant lmao
+    if (current->getNumChains() == 0) return false;
+    
+    // checks if all available chains occupied
+    bool allOccupied = true;
+    for (int i = 0; i < current->getMaxNumChains(); i++)
+    {
+        allOccupied = allOccupied && current->positionOccupied(i);
+    }
+    
+    return allOccupied && !current->matchSomeChain();
+}
+
 /*
 * Allows player to sell a desired chain.
 */
 void Table::playerSellChain() {
+    ////// Getting chain to sell //////
+    int chainChoice = 0; // 0 default if no chain
+    bool correct = true;
+    do {
+        std::cout << "\n\tWhich chain would you like to sell?" << std::endl;
+        std::cout << "\tEnter the chain number: ";
+        std::cin >> chainChoice;
+        // checking user input
+        if (chainChoice < 1 || chainChoice > current->getMaxNumChains())
+        {
+            correct = false;
+            std::cout << "\tNo such chain. Try a number between 1 and " << current->getMaxNumChains() << std::endl;
+        } else {
+            // subtract to make up for index
+            chainChoice--;
+            
+            try {
+                // LEO HERE WRITE SELL IMPLEMENTATION //
 
+
+
+
+
+
+                ////////////////////////////////////////
+                correct = true;
+                std::cout << "\n\tChain sold." << std::endl;
+            } catch (std::exception const&e) {
+                correct = false;
+                std::cout << "\n\tError: There was an error." << std::endl;
+                std::cout << "\n\tTry again." << std::endl;
+            }
+        }
+    } while (!correct);
 }
 
 /*
@@ -258,7 +309,13 @@ void Table::lastDraw() {
         if (!discardIsEmpty())
         {
             card = discardPile.pickUp();
-            tradeArea+= card;
+            
+            if (tradeArea.legal(card))
+            {
+                tradeArea+= card;
+            } else {
+                discardPile+= card;
+            }
         }
     } while (tradeArea.legal(card) && !discardIsEmpty());
 }
