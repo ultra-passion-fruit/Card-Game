@@ -8,7 +8,7 @@
 */
 Player::Player(std::string& inputName) : 
     name(inputName),
-    numOfCoins(0),
+    numOfCoins(5),
     maxNumChains(2),
     chains(0) {
         occupied[0] = false;
@@ -76,10 +76,10 @@ int Player::handSize() {
 /**
  * Returns true if top card in hand matches any chain player has.
  * False, otherwise.
+ * @param card
  * @return bool
  */
-bool Player::matchSomeChain() {
-    Card* card = hand.top();
+bool Player::matchSomeChain(Card* card) {
     bool matched;
     for (int i = 0; i < getNumChains(); i++)
     {
@@ -157,12 +157,9 @@ void Player::addChain(std::string cardName, int chainPosition) {
 * Adds a new chain to the player.
 */
 void Player::buyThirdChain() {
-    if (numOfCoins >= 3)
-    {
-        chains.resize(3);
-    } else {
-
-    }
+    numOfCoins = numOfCoins - 3;
+    chains.resize(3);
+    maxNumChains = 3;
 }
 
 /**

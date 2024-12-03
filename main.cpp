@@ -93,20 +93,6 @@ int main() {
             pick = pick == 1;
             char another = 'n';
             do {
-
-                if (table.mustSell())
-                {
-                    std::cout << "\n\tYou have no matching chains for your next card. You must sell a chain." << std::endl;
-
-                    // prompts player to sell a chain
-                    table.playerSellChain();
-
-                    // displays ENTER message
-                    enter();
-
-                    std::cout << table << std::endl;
-                }
-                
                 // SELECT card to add
                 // if pick=true, don't discard, pick. Otherwise, discard
                 // 2nd arg = false, add from trade area, not hand
@@ -137,20 +123,7 @@ int main() {
         std::cout << "\n[2] Choose a chain to place your topmost card in." << std::endl;
         // REPEAT as long as player wants
         do
-        {
-            if (table.mustSell())
-            {
-                std::cout << "\n\tYou have no matching chains for your next card. You must sell a chain." << std::endl;
-
-                // prompts player to sell a chain
-                table.playerSellChain();
-
-                // displays ENTER message
-                enter();
-
-                std::cout << table << std::endl;
-            }
-            
+        {   
             // PLAYER play topmost card from hand
             table.addToChains(false, true);
             
@@ -208,19 +181,6 @@ int main() {
         {
             char another = 'n';
             do {
-                if (table.mustSell())
-                {
-                    std::cout << "\n\tYou have no matching chains for your next card. You must sell a chain." << std::endl;
-
-                    // prompts player to sell a chain
-                    table.playerSellChain();
-
-                    // displays ENTER message
-                    enter();
-
-                    std::cout << table << std::endl;
-                }
-                
                 // SELECT card to add
                 table.addToChains(false, false);
 

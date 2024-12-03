@@ -28,7 +28,7 @@ class Player {
         int getNumChains();
         int handSize();
         bool positionOccupied(int);
-        bool matchSomeChain();
+        bool matchSomeChain(Card*);
         Card* play();
         void pickUp(Card*);
         Card* disCard(int);

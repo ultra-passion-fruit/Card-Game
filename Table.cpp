@@ -154,6 +154,38 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                 }
             } while (!found);
         }
+
+        while (mustSell(card))
+        {
+            std::cout << "\n\tYou have no matching chains for your next card." << std::endl;
+
+            // OPTION: Sell or buy chain
+            int sell = true;
+            std::cout << "\n\tOPTION:" << std::endl;
+            std::cout << "\t(1) Sell one of your chains." << std::endl;
+            std::cout << "\t(2) Buy another chain for 3 coins." << std::endl;
+            do {
+                std::cout << "\n\tChoice: ";
+                std::cin >> sell;
+            } while (sell > 2 || sell < 1);
+            // assigning bool value to sell based on player choice
+            sell = sell == 1;
+
+            if (!sell)
+            {   
+                // allows player to buy new chain
+                playerBuyChain();
+                // Note: player may choose not to buy
+                // In that case, they will be forced to sell a chain.
+
+                std::cout << *this << std::endl;
+            } else {
+                // allows player to sell a chain
+                playerSellChain();
+
+                std::cout << *this << std::endl;
+            }
+        }
         
         ////// Getting chain to place card into //////
         int chainChoice = 0; // 0 default if no chain
@@ -200,9 +232,10 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
 }
 
 /**
- * Returns true if player must sell chain.
+ * Returns true if player must sell chain (no matching card)
+ * @param card used to check against player chains
  */
-bool Table::mustSell() {
+bool Table::mustSell(Card* cardToMatch) {
     // returns false if no chains, dont need to sell, cant lmao
     if (current->getNumChains() == 0) return false;
     
@@ -213,7 +246,7 @@ bool Table::mustSell() {
         allOccupied = allOccupied && current->positionOccupied(i);
     }
     
-    return allOccupied && !current->matchSomeChain();
+    return allOccupied && !current->matchSomeChain(cardToMatch);
 }
 
 /*
@@ -254,6 +287,27 @@ void Table::playerSellChain() {
             }
         }
     } while (!correct);
+}
+
+/**
+ * Will let player buy an additional chain for 3 coins =) $$$$
+ */
+void Table::playerBuyChain() {
+
+    int costOfNewChain = 3;
+    if (current->getMaxNumChains() < costOfNewChain)
+    {   
+        if (current->getNumCoins() >= costOfNewChain)
+        {
+            current->buyThirdChain();
+            std::cout << "\n\tAdded new chain." << std::endl;
+        } else {
+            std::cout << "\n\tYou do not have enough coins." << std::endl;
+        }
+    } else {
+        std::cout << "\n\tYou have already reached the maximum number of chains allowed." << std::endl;
+        std::cout << "\n\tYou will have to sell one of your chains." << std::endl;
+    }
 }
 
 /*
@@ -318,7 +372,7 @@ void Table::lastDraw() {
                 discardPile+= card;
             }
         }
-    } while (tradeArea.legal(card) && !discardIsEmpty());
+    } while (!discardIsEmpty() && tradeArea.legal(card));
 }
 
 /*
@@ -333,8 +387,12 @@ void Table::finishTurn() {
 std::ostream& operator<<(std::ostream& os, Table& table) {
     os << "\n============================== Table ===============================\n\n";
     
+    std::cout << "(Player 1)  " << table.player1.getNumCoins() << " coins" << std::endl;
+    std::cout << "(Player 2)  " << table.player2.getNumCoins() << " coins" << std::endl;
+    std::cout << "\n---" << std::endl;
+
     // Display Trade Area
-    os << "Trade Area: ";
+    os << "\nTrade Area: ";
     if (!table.tradeArea.empty())
     {   
         os << table.tradeArea << std::endl;
