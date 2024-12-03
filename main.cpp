@@ -252,6 +252,11 @@ int main() {
         // CHANGE player
         table.changeCurrent();
     }
+    if(winner == "Draw"){
+        std::cout << "It is a draw" << std:: endl;
+    } else {
+        std::cout << winner << " won! Congrats!" << std::endl; 
+    }
     return 0;
 }
 

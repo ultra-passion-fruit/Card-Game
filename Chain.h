@@ -14,11 +14,11 @@
 // A template class will have to created for Chain being parametric in the type of card. In this
 // project, we will instantiate Chain for the corresponding bean card.
 
-// class IllegalType: public std::exception{
-// public:
-//     IllegalType() = default;
-//     const char* what() const noexcept {return "Card type mismatch.";}
-// };
+class IllegalType: public std::exception{
+public:
+    IllegalType() = default;
+    virtual const char* what() const noexcept override {return "Illegal move: Card type mismatch.";}
+};
 
 template <class T> class Chain : public Chain_Base {
 private:
@@ -32,6 +32,12 @@ public:
     void print(std::ostream&) override;
 
     Chain<T>& operator+=(Card*) override;
+
+    // void empty() override {
+    //     return chain.empty();
+    // }
+
+    void destroy() override;
 
 
     /**
@@ -82,7 +88,7 @@ int Chain<T>::sell() {
         } else if(chain.front()-> getName() == "garden" && i > 3){
             break;
         } else {
-            int numReference = chain.front() -> getCardsPerCoin(coins);
+            int numReference = chain.front() -> getCardsPerCoin(i);
             if (numChain >= numReference){
                 coins = i;
             } else {
@@ -111,13 +117,20 @@ template <class T>
 Chain<T> &Chain<T>::operator+=(Card * c) {
     T* type = dynamic_cast<T*>(c);
     if(!type){
-        // throw IllegalType();
-        throw std::invalid_argument("Card type mismatch.");
+        throw IllegalType();
+        // throw std::invalid_argument("Card type mismatch.");
     } else {
         chain.push_back(type);
         return *this;
     }
 
+}
+
+template <class T>
+void Chain<T>::destroy(){
+    while(!chain.empty){
+        chain.pop_back();
+    }
 }
 #endif
 

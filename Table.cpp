@@ -41,14 +41,15 @@ bool Table::win(std::string& winnerName) {
     {
         return false;
     } else {
-        if (bool winning = player1.getNumCoins() > player2.getNumCoins())
+        if (player1.getNumCoins() > player2.getNumCoins())
         {
             winnerName = player1.getName();
-            return winning;
-        } else {
+        } else if(player1.getNumCoins() < player2.getNumCoins()){
             winnerName = player2.getName();
-            return !winning;
+        } else {
+            winnerName = "Draw";
         }
+        return true; 
     }
 }
 
@@ -238,11 +239,11 @@ void Table::playerSellChain() {
             try {
                 // LEO HERE WRITE SELL IMPLEMENTATION //
 
+                int coins = (*current)[chainChoice].sell();
+                (*current)[chainChoice].destroy();
+                (*current)+=coins;
 
-
-
-
-
+                std::cout << "\n\tYou got " << coins << " coins. Hurray!" << std::endl;
                 ////////////////////////////////////////
                 correct = true;
                 std::cout << "\n\tChain sold." << std::endl;
