@@ -46,7 +46,9 @@ Card* TradeArea::trade(std::string beanName) {
     for(it = this->begin(); it != this->end(); it++) {
         if ((*it)->getName() == beanName)
         {
-            return *(this->erase(it));
+            Card* card = *it;
+            this->erase(it);
+            return card;
         }
     }
     throw std::invalid_argument("No card with such bean in trade area.");
