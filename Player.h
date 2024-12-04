@@ -9,6 +9,11 @@
 #include "Chain.h"
 #include "Hand.h"
 
+class NotEnoughCoins: public std::exception{
+public:
+    NotEnoughCoins() = default;
+    virtual const char* what() const noexcept override {return "Illegal move - Not enough coins for chain purchase.";}
+};
 class Player {
     private:
         Hand hand;

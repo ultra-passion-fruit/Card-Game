@@ -3,6 +3,8 @@
 #include <stdexcept>
 #include <iostream>
 
+
+
 /*
 * Constructor with name.
 */
@@ -158,6 +160,7 @@ void Player::addChain(std::string cardName, int chainPosition) {
 * Adds a new chain to the player.
 */
 void Player::buyThirdChain() {
+    if(numOfCoins < 3) throw NotEnoughCoins();
     numOfCoins = numOfCoins - 3;
     chains.resize(3);
     maxNumChains = 3;

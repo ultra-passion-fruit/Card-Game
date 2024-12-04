@@ -16,8 +16,5 @@ class Chain_Base {
         virtual Chain_Base& operator+=(Card*) = 0;
         // Print the chain according to specified format.
         virtual void print(std::ostream&) = 0;
-
-        // virtual void empty() = 0;
-        // virtual void destroy() = 0;
 };
 #endif

@@ -17,7 +17,7 @@
 class IllegalType: public std::exception{
 public:
     IllegalType() = default;
-    virtual const char* what() const noexcept override {return "Illegal move: Card type mismatch.";}
+    virtual const char* what() const noexcept override {return "Illegal move - Card type mismatch.";}
 };
 
 template <class T> class Chain : public Chain_Base {
@@ -32,12 +32,6 @@ public:
     void print(std::ostream&) override;
 
     Chain<T>& operator+=(Card*) override;
-
-    // void empty() override {
-    //     return chain.empty();
-    // }
-
-    // void destroy() override;
 
 
     /**
@@ -82,7 +76,7 @@ int Chain<T>::sell() {
     }
 
     int numChain = chain.size();
-    for(int i = 1; i <= 4; i++){
+    for(int i = 1; i <= 4; ++i){
         if(chain.front()->getName() == "garden" && i == 1){
             continue;
         } else if(chain.front()-> getName() == "garden" && i > 3){
@@ -125,12 +119,5 @@ Chain<T> &Chain<T>::operator+=(Card * c) {
     }
 
 }
-
-// template <class T>
-// void Chain<T>::destroy(){
-//     while(!chain.empty()){
-//         chain.pop_back();
-//     }
-// }
 #endif
 

@@ -300,8 +300,13 @@ void Table::playerBuyChain() {
     {   
         if (current->getNumCoins() >= costOfNewChain)
         {
-            current->buyThirdChain();
-            std::cout << "\n\tAdded new chain." << std::endl;
+            try{
+                current->buyThirdChain();
+                std::cout << "\n\tAdded new chain." << std::endl;
+            } catch(NotEnoughCoins& e){
+                std::cout << "Exception: " << e.what() << std::endl;
+            }
+            
         } else {
             std::cout << "\n\tYou do not have enough coins." << std::endl;
         }
@@ -315,37 +320,42 @@ void Table::playerBuyChain() {
 * Will let player choose a card to discard from their hand.
 */
 void Table::playerDiscards() {
-    ////// Getting card from hand //////
-    std::cout << "\n\tPick a card from your hand. Take a look at the table above to see your hand." << std::endl;
-    // current->printHand(std::cout, true);
-    
-    std::cout << "\tFirst card is 1, second is 2, etc." << std::endl;
+    if(current->handSize() > 0){
+        ////// Getting card from hand //////
+        std::cout << "\n\tPick a card from your hand. Take a look at the table above to see your hand." << std::endl;
+        // current->printHand(std::cout, true);
+        
+        std::cout << "\tFirst card is 1, second is 2, etc." << std::endl;
 
-    Card* card;
-    bool correct = true;
-    int position;
-    do {
-        std::cout << "\tEnter the position: ";
-        std::cin >> position;
-        if (position < 1 || position > current->handSize())
-        {
-            correct = false;
-            std::cout << "\n\tNo such position. Try a number between 1 and " << current->handSize() << "." << std::endl;
-        } else {
-            // getting card from hand and moving to discard pile
-            position--;
-            correct = true;
-            try {
-                card = current->disCard(position);
-                discardPile += card;
-            } catch (std::out_of_range e) {
-                std::cout << e.what();
-                std::cout << "\tTry again.";
+        Card* card;
+        bool correct = true;
+        int position;
+        do {
+            std::cout << "\tEnter the position: ";
+            std::cin >> position;
+            if (position < 1 || position > current->handSize())
+            {
+                correct = false;
+                std::cout << "\n\tNo such position. Try a number between 1 and " << current->handSize() << "." << std::endl;
+            } else {
+                // getting card from hand and moving to discard pile
+                position--;
+                correct = true;
+                try {
+                    card = current->disCard(position);
+                    discardPile += card;
+                } catch (std::out_of_range e) {
+                    std::cout << e.what();
+                    std::cout << "\tTry again.";
+                }
             }
-        }
-    } while (!correct);
+        } while (!correct);
 
-    std::cout<< "\n\tCard discarded." << std::endl;
+        std::cout<< "\n\tCard discarded." << std::endl;
+    } else {
+        std::cout << "\n\tPlayer hand is empty. Skipping..." << std::endl;
+    }
+    
 }
 
 /*
