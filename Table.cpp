@@ -221,8 +221,9 @@ void Table::addToChains(bool allowDiscard, bool fromHand) {
                     chain->operator+=(card);
                     correct = true;
                     std::cout << "\n\tCard added to chain." << std::endl;
-                } catch (std::exception const&e) {
+                } catch (IllegalType& e) {
                     correct = false;
+                    std::cout << "\n\tException: " << e.what() << std::endl;
                     std::cout << "\n\tError: There was an error." << std::endl;
                     std::cout << "\n\tTry again." << std::endl;
                 }
@@ -273,8 +274,8 @@ void Table::playerSellChain() {
                 // LEO HERE WRITE SELL IMPLEMENTATION //
 
                 int coins = (*current)[chainChoice].sell();
-                (*current)[chainChoice].destroy();
                 (*current)+=coins;
+                current->sellChain(chainChoice);
 
                 std::cout << "\n\tYou got " << coins << " coins. Hurray!" << std::endl;
                 ////////////////////////////////////////

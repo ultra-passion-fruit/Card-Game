@@ -18,6 +18,6 @@ class Chain_Base {
         virtual void print(std::ostream&) = 0;
 
         // virtual void empty() = 0;
-        virtual void destroy() = 0;
+        // virtual void destroy() = 0;
 };
 #endif

@@ -66,7 +66,8 @@ int Player::getNumChains() {
 }
 
 /*
-* Returns size of the player's hand 😏
+* Returns size of the player's hand 😏.
+* Nah bro, you wildin'
 *@return int
 */
 int Player::handSize() {
@@ -165,9 +166,11 @@ void Player::buyThirdChain() {
 /**
  * Sells a player's chain.
  */
-void Player::sellChain() {
+void Player::sellChain(int idx) {
     // idk
-    int i = 4;
+    delete chains[idx];
+    occupied[idx] = false;
+    // int i = 4;
 }
 
 /*

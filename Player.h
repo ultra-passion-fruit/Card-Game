@@ -34,7 +34,7 @@ class Player {
         Card* disCard(int);
         void addChain(std::string, int);
         void buyThirdChain();
-        void sellChain();
+        void sellChain(int);
         Player& operator+=(int);
         Chain_Base& operator[](int);
         std::ostream& printHand(std::ostream&, bool);

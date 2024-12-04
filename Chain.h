@@ -1,4 +1,4 @@
-#pragma once
+// #pragma once
 #ifndef CHAIN_H
 #define CHAIN_H
 #include <istream>
@@ -37,7 +37,7 @@ public:
     //     return chain.empty();
     // }
 
-    void destroy() override;
+    // void destroy() override;
 
 
     /**
@@ -126,11 +126,11 @@ Chain<T> &Chain<T>::operator+=(Card * c) {
 
 }
 
-template <class T>
-void Chain<T>::destroy(){
-    while(!chain.empty){
-        chain.pop_back();
-    }
-}
+// template <class T>
+// void Chain<T>::destroy(){
+//     while(!chain.empty()){
+//         chain.pop_back();
+//     }
+// }
 #endif
 
