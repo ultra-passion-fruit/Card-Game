@@ -96,7 +96,7 @@ int main() {
                 // SELECT card to add
                 // if pick=true, don't discard, pick. Otherwise, discard
                 // 2nd arg = false, add from trade area, not hand
-                table.addToChains(pick, false);
+                table.addToChains(!pick, false);
 
                 // displays ENTER message
                 enter();
