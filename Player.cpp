@@ -75,8 +75,7 @@ int Player::getNumChains() {
 }
 
 /*
-* Returns size of the player's hand 😏.
-* Nah bro, you wildin'
+* Returns size of the player's hand.
 *@return int
 */
 int Player::handSize() {

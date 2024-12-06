@@ -22,9 +22,7 @@ public:
     // Default constructor of the Deck.
     Deck() = default;
 
-    // Reconstructs a deck from file using cards from the CardFactory
     Deck(std::istream&, const CardFactory*);
-
     Card* draw();
     friend std::ostream& operator<<(std::ostream&, Deck&);
 };

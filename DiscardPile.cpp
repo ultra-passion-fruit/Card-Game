@@ -1,6 +1,9 @@
 //Implementation for discardpile
 #include "DiscardPile.h"
 
+/**
+ * Reconstructs a DiscardPile from file based on cards on CardFactory.
+ */
 DiscardPile::DiscardPile(std::istream & is, const CardFactory * cardFactory) {
     std::string ln;
     std::vector<bool> got(104, false);
@@ -11,6 +14,7 @@ DiscardPile::DiscardPile(std::istream & is, const CardFactory * cardFactory) {
             for(int i = 0; i < 104; i++){
                 if(!got[i] && fullDeck[i]->getName().at(0) == c){
                     discardPile.push_back(fullDeck[i]);
+                    got[i] = true;
                 }
             }
         }

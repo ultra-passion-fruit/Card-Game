@@ -12,7 +12,7 @@ TradeArea::TradeArea() {
 /**
  * Constructor for create from file save.
  */
-TradeArea::TradeArea(istream& is, const CardFactory* cardFactory) {
+TradeArea::TradeArea(std::istream& is, const CardFactory* cardFactory){
     std::string ln;
     std::vector<bool> got(104, false);
     std::getline(is, ln);
@@ -22,6 +22,7 @@ TradeArea::TradeArea(istream& is, const CardFactory* cardFactory) {
             for(int i = 0; i < 104; i++){
                 if(!got[i] && fullDeck[i]->getName().at(0) == c){
                     push_back(fullDeck[i]);
+                    got[i] = true;
                 }
             }
         }

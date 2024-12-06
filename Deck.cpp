@@ -2,6 +2,9 @@
 #include "Deck.h"
 #include "CardFactory.h"
 
+/**
+ * Reconstructs a deck from file using cards from the CardFactory
+ */
 Deck::Deck(std::istream & is, const CardFactory * cardFactory) {
     std::string ln;
     std::vector<bool> got(104, false);
@@ -12,6 +15,7 @@ Deck::Deck(std::istream & is, const CardFactory * cardFactory) {
             for(int i = 0; i < 104; i++){
                 if(!got[i] && fullDeck[i]->getName().at(0) == c){
                     push_back(fullDeck[i]);
+                    got[i] = true;
                 }
             }
         }

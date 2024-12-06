@@ -276,14 +276,12 @@ void Table::playerSellChain() {
             chainChoice--;
             
             try {
-                // LEO HERE WRITE SELL IMPLEMENTATION //
 
                 int coins = (*current)[chainChoice].sell();
                 (*current)+=coins;
                 current->sellChain(chainChoice);
 
                 std::cout << "\n\tYou got " << coins << " coins. Hurray!" << std::endl;
-                ////////////////////////////////////////
                 correct = true;
                 std::cout << "\n\tChain sold." << std::endl;
             } catch (std::exception const&e) {
@@ -296,7 +294,7 @@ void Table::playerSellChain() {
 }
 
 /**
- * Will let player buy an additional chain for 3 coins =) $$$$
+ * Will let player buy an additional chain for 3 coins
  */
 void Table::playerBuyChain() {
 
@@ -328,7 +326,6 @@ void Table::playerDiscards() {
     if(current->handSize() > 0){
         ////// Getting card from hand //////
         std::cout << "\n\tPick a card from your hand. Take a look at the table above to see your hand." << std::endl;
-        // current->printHand(std::cout, true);
         
         std::cout << "\tFirst card is 1, second is 2, etc." << std::endl;
 

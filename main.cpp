@@ -11,22 +11,17 @@ int main() {
     // creating factory
     CardFactory* factory = CardFactory::getFactory();;
     std::cout << "Welcome to Card Game!" << std::endl;
+    
     // Player 1 input name
-    std::string nameP1 = "Test 1";
-    std::cout << "P1 Name: " << nameP1 << std::endl;
-    ////// COMMENTED OUT FOR TESTING/////
-    // std::cout << "P1 Name: ";
-    // std::cin >> nameP1;
-    /////////////////////////////////////
+    std::string nameP1;
+    std::cout << "P1 Name: ";
+    std::cin >> nameP1;
     Player p1(nameP1);
     
     // Player 2 input name
     std::string nameP2 = "Test 2";
-    std::cout << "P2 Name: " << nameP2 << std::endl;
-    ////// COMMENTED OUT FOR TESTING/////
-    // std::cout << "P2 Name: ";
-    // std::cin >> nameP2;
-    /////////////////////////////////////
+    std::cout << "P2 Name: ";
+    std::cin >> nameP2;
     Player p2(nameP2);
     
     std::cout << "\nGreat! Let's begin." << std::endl;
@@ -54,10 +49,6 @@ int main() {
     // REPEAT as long as deck is not empty
     while (!table.win(winner))
     {
-        // if PAUSE then save game (to file) and exit
-            // TODO (maybe)
-        
-        // else
 
         // display table
             // shows deck, trade area and player hands

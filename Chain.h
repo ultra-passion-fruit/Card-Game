@@ -30,7 +30,6 @@ public:
     Chain(std::istream&, const CardFactory*);
     int sell() override;
     void print(std::ostream&) override;
-
     Chain<T>& operator+=(Card*) override;
 
 
@@ -57,6 +56,7 @@ Chain<T>::Chain(std::istream & is, const CardFactory * cardFactory) {
             for(int i = 0; i < 104; i++){
                 if(!got[i] && fullDeck[i]->getName().at(0) == c){
                     chain.push_back(fullDeck[i]);
+                    got[i] = true;
                 }
             }
         }
@@ -75,6 +75,12 @@ int Chain<T>::sell() {
         return coins;
     }
 
+    // The following code will discover the chain size corresponding to the coin value
+    // from 1 to 4 for a given chain type. If the current chain of the player is bigger
+    // or equal to the returned chain value, the player will continue to gain coins.
+    // Otherwise, the total amount of coin that the player has gained will be returned.
+    // If the current chain of type garden, then coin values 1 and 4 are not
+    // considered due to the table of values in the project description.
     int numChain = chain.size();
     for(int i = 1; i <= 4; ++i){
         if(chain.front()->getName() == "garden" && i == 1){
@@ -93,6 +99,9 @@ int Chain<T>::sell() {
     return coins;
 }
 
+/**
+* Print the chain according to specified format.
+*/
 template <class T>
 void Chain<T>::print(std::ostream & os) {
     os << chain.front()->getName() <<"\t";
@@ -112,7 +121,6 @@ Chain<T> &Chain<T>::operator+=(Card * c) {
     T* type = dynamic_cast<T*>(c);
     if(!type){
         throw IllegalType();
-        // throw std::invalid_argument("Card type mismatch.");
     } else {
         chain.push_back(type);
         return *this;

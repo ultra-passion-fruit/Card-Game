@@ -10,7 +10,7 @@ Hand::Hand() {
 /**
  * Constructor for create from file save.
  */
-Hand::Hand(istream& is, const CardFactory* cardFactory) {
+Hand::Hand(std::istream& is, const CardFactory* cardFactory){
     std::string ln;
     std::vector<bool> got(104, false);
     std::getline(is, ln);
@@ -19,7 +19,8 @@ Hand::Hand(istream& is, const CardFactory* cardFactory) {
         if(c != ' '){
             for(int i = 0; i < 104; i++){
                 if(!got[i] && fullDeck[i]->getName().at(0) == c){
-                    push_back(fullDeck[i]);
+                    push(fullDeck[i]);
+                    got[i] = true;
                 }
             }
         }

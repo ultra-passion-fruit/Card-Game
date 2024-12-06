@@ -21,7 +21,6 @@ public:
     // Default constructor for DiscardPile.
     DiscardPile() = default;
 
-    // Reconstructs a DiscardPile from file based on cards on CardFactory.
     DiscardPile(std::istream&, const CardFactory*);
     bool empty();
     DiscardPile& operator+=(Card*);

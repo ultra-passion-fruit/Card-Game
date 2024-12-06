@@ -19,30 +19,29 @@ class Card {
         std::string cardName;
     public:
         Card() = default;
-        // Card(const std::array<int, 4>& chainVal){
-        //     for(int i = 0; i < 4; i++){
-        //         valTable[i] = chainVal[i];
-        //     }
-        // }
-        // explicit Card(const int chainVal[4]){
-        //     for(int i = 0; i < 4; i++){
-        //         valTable[i] = chainVal[i];
-        //     }
-        // }
         Card(const Card&) = delete;
         Card& operator=(const Card&) = delete;
 
-        // Takes an amount of coins as integer input and return a chain number with
-        // the corresponding value.
+        /**
+         * Takes an amount of coins as integer input and return a chain number with
+         * the corresponding value.
+         * 
+         */
         virtual int getCardsPerCoin(int) = 0;
 
-        // Returns a string to represent the full name of the card.
+        /**
+         * Returns a string to represent the full name of the card.
+         */
         virtual std::string getName() const = 0;
 
-        // Inserts the first character of the card in the provided output stream.
+        /**
+         * Inserts the first character of the card in the provided output stream.
+         */
         virtual void print(std::ostream&) = 0;
 
-        // Global output stream for printing any card types derived from Card.
+        /**
+         * Global output stream for printing any card types derived from Card.
+         */
         friend std::ostream& operator <<(std::ostream& os, Card& c);
 };
 
@@ -51,7 +50,7 @@ class Card {
 
 class Blue: public Card {
     friend class CardFactory;
-    // std::vector<int> valTable;
+
     Blue(){
         cardName = "Blue";
         valTable[0] = 3;
@@ -67,7 +66,7 @@ public:
 
 class Chili: public Card {
     friend class CardFactory;
-    // std::vector<int> valTable;
+
     Chili(){
         cardName = "Chili";
         valTable[0] = 3;
@@ -83,7 +82,7 @@ public:
 
 class Stink: public Card {
     friend class CardFactory;
-    // std::vector<int> valTable;
+
     Stink(){
         cardName = "Stink";
         valTable[0] = 3;
@@ -99,7 +98,7 @@ public:
 
 class Green: public Card {
     friend class CardFactory;
-    // std::vector<int> valTable;
+
     Green(){
         cardName = "Green";
         valTable[0] = 3;
@@ -115,7 +114,7 @@ public:
 
 class Soy: public Card {
     friend class CardFactory;
-    // std::vector<int> valTable;
+
     Soy(){
         cardName = "soy";
         valTable[0] = 2;
@@ -131,7 +130,7 @@ public:
 
 class Black: public Card {
     friend class CardFactory;
-    // std::vector<int> valTable;
+
     Black(){
         cardName = "black";
         valTable[0] = 2;
@@ -147,7 +146,7 @@ public:
 
 class Red: public Card {
     friend class CardFactory;
-    // std::vector<int> valTable;
+
     Red() {
         cardName = "Red";
         valTable[0] = 2;
@@ -163,7 +162,7 @@ public:
 
 class Garden: public Card {
     friend class CardFactory;
-    // std::vector<int> valTable;
+
     Garden(){
         cardName = "garden";
         valTable[0] = -1;
