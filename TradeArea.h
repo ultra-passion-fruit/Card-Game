@@ -12,7 +12,7 @@
 
 class TradeArea : public std::list<Card*> {
     public:
-        // TradeArea(std::istream&, const CardFactory*);
+        TradeArea(std::istream&, const CardFactory*);
         TradeArea();
         int numCards();
         bool legal(Card*);

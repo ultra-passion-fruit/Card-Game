@@ -9,6 +9,25 @@ TradeArea::TradeArea() {
 
 }
 
+/**
+ * Constructor for create from file save.
+ */
+TradeArea::TradeArea(istream& is, const CardFactory* cardFactory) {
+    std::string ln;
+    std::vector<bool> got(104, false);
+    std::getline(is, ln);
+    Deck fullDeck = cardFactory->getDeck();
+    for(char& c: ln){
+        if(c != ' '){
+            for(int i = 0; i < 104; i++){
+                if(!got[i] && fullDeck[i]->getName().at(0) == c){
+                    push_back(fullDeck[i]);
+                }
+            }
+        }
+    }
+}
+
 /*
 * Returns the number of cards in the trade area.
 * @return int

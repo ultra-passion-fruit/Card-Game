@@ -16,7 +16,7 @@
 class Hand : public std::queue<Card*, std::list<Card*> > {
     public:
         Hand();
-        // Hand(std::istream&, const CardFactory*);
+        Hand(std::istream&, const CardFactory*);
         // ~Hand();
         std::list<Card*> getContainer();
         Hand& operator+=(Card*);

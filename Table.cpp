@@ -6,8 +6,13 @@
 * @param istream& is
 * @param CardFactory* factory
 */
-Table::Table(std::istream& is, const CardFactory* factory) {
-
+Table::Table(std::istream& is, const CardFactory* factory) :
+    player1(is, factory),
+    player2(is, factory),
+    deck(is, factory),
+    discardPile(is, factory),
+    tradeArea(is, factory) {
+        current = &player1;
 }
 
 /*

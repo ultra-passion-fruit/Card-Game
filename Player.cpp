@@ -21,8 +21,15 @@ Player::Player(std::string& inputName) :
 /*
 * Constructor for create from file save.
 */
-Player::Player(std::istream& inputStream, const CardFactory*) {
-
+Player::Player(std::istream& inputStream, const CardFactory* factory) : 
+    hand(inputStream, factory) {
+        std::getline(inputStream, name);
+        inputStream >> numOfCoins;
+        inputStream >> maxNumChains;
+        inputStream >> numOfCoins;
+        for (int i = 0; i < 3; ++i) {
+            inputStream >> occupied[i];
+        }
 }
 
 /**

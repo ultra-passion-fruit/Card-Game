@@ -7,6 +7,25 @@ Hand::Hand() {
 
 }
 
+/**
+ * Constructor for create from file save.
+ */
+Hand::Hand(istream& is, const CardFactory* cardFactory) {
+    std::string ln;
+    std::vector<bool> got(104, false);
+    std::getline(is, ln);
+    Deck fullDeck = cardFactory->getDeck();
+    for(char& c: ln){
+        if(c != ' '){
+            for(int i = 0; i < 104; i++){
+                if(!got[i] && fullDeck[i]->getName().at(0) == c){
+                    push_back(fullDeck[i]);
+                }
+            }
+        }
+    }
+}
+
 /*
 * Adds a new card to the player's hand.
 * Hand is automatically sorted after adding.
